@@ -132,6 +132,7 @@
                 document.getElementById('splash').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
                 document.body.style.overflow = 'auto';
+                sessionStorage.setItem('splashShown', 'true');
             }
 
             function toggleSplash() {
@@ -147,45 +148,39 @@
                     document.body.style.overflow = 'auto';
                 }
             }
+
+            function checkSplash() {
+                const internalLinks = [
+                    "https://people-system.github.io/word-thing.html",
+                    "https://people-system.us/04-20240525.html",
+                    "https://people-system.us/03-20240406.html",
+                    "https://people-system.us/02-20240223.html",
+                    "https://people-system.github.io/01-20231209.html"
+                ];
+
+                let referrer = document.referrer;
+                let splashShown = sessionStorage.getItem('splashShown');
+
+                if (internalLinks.includes(referrer) && splashShown) {
+                    document.getElementById('splash').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    document.body.style.overflow = 'auto';
+                } else {
+                    document.getElementById('splash').style.display = 'flex';
+                    document.getElementById('main-content').style.display = 'none';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            window.onload = checkSplash;
         </script>
         <br>
         <br>
-        <a href="https://people-system.github.io/word-thing.html">word-thing.pdf</a>
-        <p class="block-text" style="color: black;">
-        <p>–</p>
-        <a href="https://people-system.us/04-20240525.html">
-            <p class="block-text" style="color: black;">
-                May 25th – June 30th<br>
-                Pascal Siskin<br>
-                Exotic guitar<br>
-            </p>
-        </a>
-        <a href="https://people-system.us/03-20240406.html">
-            <p class="block-text" style="color: black;">
-                April 6th – May 12th<br>
-                Mark Roeder<br>
-                Twelve Sculptures <br>
-            </p>
-        </a>
-        <a href="https://people-system.us/02-20240223.html">
-            <p class="block-text">
-                February 23rd – March 24th<br>
-                Nilo Goldfarb<br>
-                Zaid Milefchik<br>
-                S. Paul
-            </p>
-        </a>
-        <a href="https://people-system.github.io/01-20231209.html">
-            <p class="block-text" style="color: black;">
-                F.R.I.E.N.D.S. @ P.E.O.P.L.E. – December 9th<br>
-                Nicole-Antonia Spagnola<br>
-                Ramsey Alderson<br>
-                Emma Sims<br>
-                Zoe Barcza<br>
-                Connor Camburn<br>
-                Bedros Yeretzian
-            </p>
-        </a>
+        <a href="https://people-system.github.io/word-thing.html" onclick="sessionStorage.setItem('splashShown', 'true')">word-thing.pdf</a>
+        <a href="https://people-system.us/04-20240525.html" onclick="sessionStorage.setItem('splashShown', 'true')">May 25th – June 30th<br> Pascal Siskin<br> Exotic guitar</a>
+        <a href="https://people-system.us/03-20240406.html" onclick="sessionStorage.setItem('splashShown', 'true')">April 6th – May 12th<br> Mark Roeder<br> Twelve Sculptures</a>
+        <a href="https://people-system.us/02-20240223.html" onclick="sessionStorage.setItem('splashShown', 'true')">February 23rd – March 24th<br> Nilo Goldfarb<br> Zaid Milefchik<br> S. Paul</a>
+        <a href="https://people-system.github.io/01-20231209.html" onclick="sessionStorage.setItem('splashShown', 'true')">F.R.I.E.N.D.S. @ P.E.O.P.L.E. – December 9th<br> Nicole-Antonia Spagnola<br> Ramsey Alderson<br> Emma Sims<br> Zoe Barcza<br> Connor Camburn<br> Bedros Yeretzian</a>
 
         <p>–</p>
 
