@@ -16,86 +16,91 @@
     <meta name="msapplication-config" content="https://people-system.github.io/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-    <style>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: Times, serif; /* Set a consistent base font family */
+    }
+
+    #splash {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white; /* Set background to white */
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    #splash img {
+        max-width: 90%; /* Add margins to make space on the sides */
+        max-height: 90%;
+    }
+
+    #main-content {
+        display: none;
+        padding: 20px;
+    }
+
+    p.p1 {
+        margin: 0; /* Simplified margin */
+        font-size: 22px; /* Explicitly set font size */
+        font-family: Times, serif; /* Consistent font family */
+        -webkit-text-stroke: 1px #0000e9; /* Added stroke width for consistency */
+        cursor: pointer; /* Add cursor pointer to make it clickable */
+    }
+
+    .color-change {
+        font-kerning: none;
+    }
+
+    .block-text {
+        margin: 40px 0;
+        font-size: 18px; /* Set a specific font size for block text */
+    }
+
+    a:link, a:visited {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover, a:active {
+        color: black;
+        text-decoration: none;
+    }
+
+    /* Custom hover state */
+    a:hover {
+        background-color: black;
+        color: hotpink;
+        text-decoration: underline;
+    }
+
+    /* Media Query for Mobile Devices */
+    @media (max-width: 600px) {
         body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        #splash {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: white; /* Set background to white */
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        #splash img {
-            max-width: 90%; /* Add margins to make space on the sides */
-            max-height: 90%;
-        }
-
-        #main-content {
-            display: none;
-            padding: 20px;
+            font-size: 16px; /* Base font size adjustment for mobile */
         }
 
         p.p1 {
-            margin: 0.0px 0.0px 0.0px 0.0px;
-            font: 22.0px Times;
-            -webkit-text-stroke: #0000e9;
-            cursor: pointer; /* Add cursor pointer to make it clickable */
-        }
-
-        .color-change {
-            font-kerning: none;
+            font-size: 18px; /* Maintain emphasis on mobile */
         }
 
         .block-text {
-            margin: 40px 0;
+            margin: 20px 0;
+            font-size: 16px; /* Match the adjusted global size */
         }
+    }
+</style>
 
-        a:link, a:visited {
-            color: black;
-            text-decoration: none;
-        }
-
-        a:hover, a:active {
-            color: black;
-            text-decoration: none;
-        }
-
-        /* Custom hover state */
-        a:hover {
-            background-color: black;
-            color: hotpink;
-            text-decoration: underline;
-        }
-
-        /* Media Query for Mobile Devices */
-        @media (max-width: 600px) {
-            body, html {
-                font-size: 16px;
-            }
-
-            p.p1 {
-                font-size: 18px;
-            }
-
-            .block-text {
-                margin: 20px 0;
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="splash" onclick="hideSplash()">
