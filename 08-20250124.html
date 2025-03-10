@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Ensure proper scaling on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connor Camburn – Special Memories – 01/24/2025</title>
   <link rel="icon" href="https://people-system.github.io/favicon/favicon.ico" type="image/x-icon" />
   <style>
@@ -11,7 +13,14 @@
       margin: 0;
       padding: 0;
       display: flex;
+      /* You can also consider box-sizing for the entire page: */
+      box-sizing: border-box;
     }
+    /* Apply box-sizing to all elements for consistent sizing */
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
     img {
       height: auto;
     }
@@ -95,7 +104,7 @@
     
     /* Main Content Container */
     .content {
-      margin-left: 80px;
+      margin-left: 80px; /* Leave space for sidebar */
       padding: 20px;
       flex: 1;
     }
@@ -113,71 +122,99 @@
       height: auto;
       border: 1px solid #ccc;
     }
-  </style>
-  <!-- Additional styles from test-index.html for Section C -->
-  <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #000000;
-            padding: 40px;
-        }
+    
+    /* Additional styles for Section C (Poem Section) */
+    body {
+        /* Removed large padding so the poem text isn't forced too far in. */
+        background-color: #ffffff;
+        color: #000000;
+    }
 
-        .title {
-            font-size: 26pt;
-            font-weight: 100;
-            color: #000000;
-            margin-bottom: 10px;
-        }
+    .title {
+        font-size: 26pt;
+        font-weight: 100;
+        color: #000000;
+        margin-bottom: 10px;
+    }
 
-        .poem-tag-group {
-            display: inline-flex; /* Keeps the tags together in one visual block */
-            margin: 5px;
-            background-color: black; /* Shared background */
-            padding: 2px 4px;
-        }
+    .poem-tag-group {
+        display: inline-flex; /* Keeps the tags together in one visual block */
+        margin: 5px;
+        background-color: black; /* Shared background */
+        padding: 2px 4px;
+    }
 
-        .poem-tags {
-            background-color: black;
-            color: white;
-            display: inline-block;
-            padding: 2px 6px;
-            font-weight: 100;
-            font-size: 14pt;
-            margin: 0; /* Remove gaps between grouped elements */
-            cursor: pointer;
-        }
+    .poem-tags {
+        background-color: black;
+        color: white;
+        display: inline-block;
+        padding: 2px 6px;
+        font-weight: 100;
+        font-size: 14pt;
+        margin: 0; /* Remove gaps between grouped elements */
+        cursor: pointer;
+    }
 
-        .poem-tags:hover {
-            background-color: white !important;
-            color: black !important;
-        }
+    .poem-tags:hover {
+        background-color: white !important;
+        color: black !important;
+    }
 
-        #content-container {
-            margin-top: 20px;
-            padding: 10px;
-            border: none;
-            white-space: pre-wrap;
-        }
-        .poem-bottom-tags {
-            background-color: black;
-            color: white;
-            display: inline-block;
-            padding: 2px 6px;
-            font-weight: 100;
-            font-size: 14pt;
-            margin: 5px;
-            cursor: pointer;
-        }
+    #content-container {
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        white-space: pre-wrap; /* Preserves line breaks from the poems */
+    }
+    .poem-bottom-tags {
+        background-color: black;
+        color: white;
+        display: inline-block;
+        padding: 2px 6px;
+        font-weight: 100;
+        font-size: 14pt;
+        margin: 5px;
+        cursor: pointer;
+    }
 
-        .poem-bottom-tags:hover {
-            background-color: white !important;
-            color: black !important;
-        }
+    .poem-bottom-tags:hover {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+@media (max-width: 768px) {
+  .content {
+    margin-left: 120px;
+    margin-right: 20px;
+    padding: 10px;
+    width: 100%; /* Ensure it's not constrained */
+    max-width: none; /* Prevent unwanted width limits */
+  }
+}
+
+      
+      /* Increase toggle button sizes for easier tapping */
+      .toggle {
+        width: 30px;
+        height: 30px;
+        font-size: 28px;
+      }
+      
+      /* Make install photos full width */
+      .install-photos img {
+        max-width: 100%;
+      }
+      
+      /* Adjust iframe size for smaller screens */
+      iframe {
+        width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Sidebar with Jump Links -->
+  <!-- Sidebar with Jump Links (remains fixed on the side) -->
   <div class="sidebar">
     <a href="#sectionA" class="toggle">A</a>
     <a href="#sectionB" class="toggle">B</a>
@@ -208,160 +245,159 @@
       </iframe>
     </div>
     
-    <!-- Section C: Replaced with the complete test-index.html content -->
+    <!-- Section C: Poem Section -->
     <div id="sectionC" class="section">
       <div class="title">Homage to Nature:</div>
       <div id="poem-tags-container"></div>
       <div id="content-container"></div>
     </div>
     
-<!-- Section D: Install Photos -->
-<div id="sectionD" class="section">
-  <div class="install-photos">
-    <img src="https://people-system.github.io/08-20250124/1.jpg" alt="Image 2">
-    <img src="https://people-system.github.io/08-20250124/2a.jpg" alt="Image 3">
-    <img src="https://people-system.github.io/08-20250124/2c.jpg" alt="Image 5">
-    <img src="https://people-system.github.io/08-20250124/2d.jpg" alt="Image 6">
-    <img src="https://people-system.github.io/08-20250124/2e.jpg" alt="Image 7">
-    <img src="https://people-system.github.io/08-20250124/2f.jpg" alt="Image 8">
-    <img src="https://people-system.github.io/08-20250124/2h.jpg" alt="Image 10">
-    <img src="https://people-system.github.io/08-20250124/3a.jpg" alt="Image 12">
-    <img src="https://people-system.github.io/08-20250124/3b.jpg" alt="Image 13">
-    <img src="https://people-system.github.io/08-20250124/3c.jpg" alt="Image 14">
-    <img src="https://people-system.github.io/08-20250124/4c.jpg" alt="Image 17">
-    <img src="https://people-system.github.io/08-20250124/4f.jpg" alt="Image 19">
-    <img src="https://people-system.github.io/08-20250124/4h.jpg" alt="Image 21">
-    <img src="https://people-system.github.io/08-20250124/4i.jpg" alt="Image 22">
-    <img src="https://people-system.github.io/08-20250124/5a.jpg" alt="Image 25">
-    <img src="https://people-system.github.io/08-20250124/5b.jpg" alt="Image 26">
-    <img src="https://people-system.github.io/08-20250124/5c.jpg" alt="Image 27">
-    <img src="https://people-system.github.io/08-20250124/5d.jpg" alt="Image 29">
-  </div>
-</div>
+    <!-- Section D: Install Photos -->
+    <div id="sectionD" class="section">
+      <div class="install-photos">
+        <img src="https://people-system.github.io/08-20250124/1.jpg" alt="Image 2">
+        <img src="https://people-system.github.io/08-20250124/2a.jpg" alt="Image 3">
+        <img src="https://people-system.github.io/08-20250124/2c.jpg" alt="Image 5">
+        <img src="https://people-system.github.io/08-20250124/2d.jpg" alt="Image 6">
+        <img src="https://people-system.github.io/08-20250124/2e.jpg" alt="Image 7">
+        <img src="https://people-system.github.io/08-20250124/2f.jpg" alt="Image 8">
+        <img src="https://people-system.github.io/08-20250124/2h.jpg" alt="Image 10">
+        <img src="https://people-system.github.io/08-20250124/3a.jpg" alt="Image 12">
+        <img src="https://people-system.github.io/08-20250124/3b.jpg" alt="Image 13">
+        <img src="https://people-system.github.io/08-20250124/3c.jpg" alt="Image 14">
+        <img src="https://people-system.github.io/08-20250124/4c.jpg" alt="Image 17">
+        <img src="https://people-system.github.io/08-20250124/4f.jpg" alt="Image 19">
+        <img src="https://people-system.github.io/08-20250124/4h.jpg" alt="Image 21">
+        <img src="https://people-system.github.io/08-20250124/4i.jpg" alt="Image 22">
+        <img src="https://people-system.github.io/08-20250124/5a.jpg" alt="Image 25">
+        <img src="https://people-system.github.io/08-20250124/5b.jpg" alt="Image 26">
+        <img src="https://people-system.github.io/08-20250124/5c.jpg" alt="Image 27">
+        <img src="https://people-system.github.io/08-20250124/5d.jpg" alt="Image 29">
+      </div>
+    </div>
     
   </div> <!-- End main content -->
   
-  <!-- Script from test-index.html for Section C -->
+  <!-- Script for Poem Section -->
   <script>
-const tagGroups = [
-    ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
-    ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
-    ["10a", "10b", "10c"], ["11a", "11b", "11c"], ["12a"], ["13a", "13b", "13c"],
-    ["14a", "14b", "14c", "14d", "14e", "14f", "14g", "14h", "14i"], ["15a", "15b", "15c"],
-    ["16a", "16b", "16c"], ["17a", "17b", "17c", "17d"], ["18a", "18b", "18c", "18d"]
-];
+    const tagGroups = [
+        ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
+        ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
+        ["10a", "10b", "10c"], ["11a", "11b", "11c"], ["12a"], ["13a", "13b", "13c"],
+        ["14a", "14b", "14c", "14d", "14e", "14f", "14g", "14h", "14i"], ["15a", "15b", "15c"],
+        ["16a", "16b", "16c"], ["17a", "17b", "17c", "17d"], ["18a", "18b", "18c", "18d"]
+    ];
 
-const navContainer = document.getElementById("poem-tags-container");
-const contentContainer = document.getElementById("content-container");
+    const navContainer = document.getElementById("poem-tags-container");
+    const contentContainer = document.getElementById("content-container");
 
-// Create navigation buttons
-tagGroups.forEach(group => {
-    const groupWrapper = document.createElement("div");
-    groupWrapper.className = "poem-tag-group";
+    // Create navigation buttons
+    tagGroups.forEach(group => {
+        const groupWrapper = document.createElement("div");
+        groupWrapper.className = "poem-tag-group";
 
-    group.forEach(tag => {
-        const tagDiv = document.createElement("div");
-        tagDiv.className = "poem-tags";
-        tagDiv.textContent = tag;
-        tagDiv.dataset.group = JSON.stringify([tag]); // Ensure single selection works properly
-        tagDiv.addEventListener("click", () => {
-            const selectedTag = JSON.parse(tagDiv.dataset.group);
-            loadPoemGroup(selectedTag);
+        group.forEach(tag => {
+            const tagDiv = document.createElement("div");
+            tagDiv.className = "poem-tags";
+            tagDiv.textContent = tag;
+            tagDiv.dataset.group = JSON.stringify([tag]); // Ensure single selection works properly
+            tagDiv.addEventListener("click", () => {
+                const selectedTag = JSON.parse(tagDiv.dataset.group);
+                loadPoemGroup(selectedTag);
+            });
+            groupWrapper.appendChild(tagDiv);
         });
-        groupWrapper.appendChild(tagDiv);
+
+        navContainer.appendChild(groupWrapper);
     });
 
-    navContainer.appendChild(groupWrapper);
-});
-
-function loadPoemGroup(groupTags) {
-  fetch("mothership-cc-poems.html")
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP error: " + response.status);
-            }
-            return response.text();
-        })
-        .then(rawText => {
-            const parser = new DOMParser();
-            const fetchedDoc = parser.parseFromString(rawText, "text/html");
-
-            // Extract all styles from the fetched document
-            let styleContent = "";
-            const styleElements = fetchedDoc.head.querySelectorAll("style");
-            styleElements.forEach(styleEl => {
-                styleContent += styleEl.outerHTML;
-            });
-
-            // Split the fetched content using <hr> tags
-            const groups = [];
-            let currentGroup = [];
-            fetchedDoc.body.childNodes.forEach(node => {
-                if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "hr") {
-                    if (currentGroup.length > 0) {
-                        groups.push(currentGroup);
-                        currentGroup = [];
-                    }
-                } else {
-                    currentGroup.push(node);
+    function loadPoemGroup(groupTags) {
+      fetch("mothership-cc-poems.html")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("HTTP error: " + response.status);
                 }
-            });
-            if (currentGroup.length > 0) {
-                groups.push(currentGroup);
-            }
+                return response.text();
+            })
+            .then(rawText => {
+                const parser = new DOMParser();
+                const fetchedDoc = parser.parseFromString(rawText, "text/html");
 
-            // Find and extract the correct poem section
-            let resultHtml = "";
-            let foundTag = "";
+                // Extract all styles from the fetched document
+                let styleContent = "";
+                const styleElements = fetchedDoc.head.querySelectorAll("style");
+                styleElements.forEach(styleEl => {
+                    styleContent += styleEl.outerHTML;
+                });
 
-            groups.forEach(groupNodes => {
-                const tempContainer = document.createElement("div");
-                groupNodes.forEach(n => tempContainer.appendChild(n.cloneNode(true)));
-                const groupHtml = tempContainer.innerHTML;
-
-                for (const tag of groupTags) {
-                    const marker = `p-${tag}`;
-                    if (groupHtml.includes(marker)) {
-                        resultHtml += `<hr>${groupHtml}`;
-                        foundTag = tag;
-                        break;
+                // Split the fetched content using <hr> tags
+                const groups = [];
+                let currentGroup = [];
+                fetchedDoc.body.childNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "hr") {
+                        if (currentGroup.length > 0) {
+                            groups.push(currentGroup);
+                            currentGroup = [];
+                        }
+                    } else {
+                        currentGroup.push(node);
                     }
+                });
+                if (currentGroup.length > 0) {
+                    groups.push(currentGroup);
                 }
-            });
 
-            // Inject styles and content into the content container
-            contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
+                // Find and extract the correct poem section
+                let resultHtml = "";
+                let foundTag = "";
 
-            // Create a bottom tag for navigation
-            if (foundTag) {
-                let bottomTag = document.createElement("div");
-                bottomTag.className = "poem-bottom-tags";
-                bottomTag.textContent = foundTag;
-                bottomTag.style.cursor = "pointer";
-                contentContainer.appendChild(bottomTag);
+                groups.forEach(groupNodes => {
+                    const tempContainer = document.createElement("div");
+                    groupNodes.forEach(n => tempContainer.appendChild(n.cloneNode(true)));
+                    const groupHtml = tempContainer.innerHTML;
 
-                bottomTag.addEventListener("click", function() {
-                    document.getElementById("poem-tags-container").scrollIntoView({
-                        behavior: "smooth"
+                    for (const tag of groupTags) {
+                        const marker = `p-${tag}`;
+                        if (groupHtml.includes(marker)) {
+                            resultHtml += `<hr>${groupHtml}`;
+                            foundTag = tag;
+                            break;
+                        }
+                    }
+                });
+
+                // Inject styles and content into the content container
+                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
+
+                // Create a bottom tag for navigation
+                if (foundTag) {
+                    let bottomTag = document.createElement("div");
+                    bottomTag.className = "poem-bottom-tags";
+                    bottomTag.textContent = foundTag;
+                    bottomTag.style.cursor = "pointer";
+                    contentContainer.appendChild(bottomTag);
+
+                    bottomTag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    });
+                }
+
+                // Ensure all bottom tags scroll back to navigation
+                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
+                    tag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
                     });
                 });
-            }
-
-            // Ensure all bottom tags scroll back to navigation
-            document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
-                tag.addEventListener("click", function() {
-                    document.getElementById("poem-tags-container").scrollIntoView({
-                        behavior: "smooth"
-                    });
-                });
+            })
+            .catch(error => {
+                console.error("Error loading file:", error);
+                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
             });
-        })
-        .catch(error => {
-            console.error("Error loading file:", error);
-            contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-        });
-}
-
+    }
   </script>
 </body>
 </html>
