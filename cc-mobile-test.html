@@ -358,4 +358,37 @@
                 });
 
                 // Inject styles and content into the content container
-                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join("
+                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
+
+                // Create a bottom tag for navigation
+                if (foundTag) {
+                    let bottomTag = document.createElement("div");
+                    bottomTag.className = "poem-bottom-tags";
+                    bottomTag.textContent = foundTag;
+                    bottomTag.style.cursor = "pointer";
+                    contentContainer.appendChild(bottomTag);
+
+                    bottomTag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    });
+                }
+
+                // Ensure all bottom tags scroll back to navigation
+                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
+                    tag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    });
+                });
+            })
+            .catch(error => {
+                console.error("Error loading file:", error);
+                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+            });
+    }
+  </script>
+</body>
+</html>
