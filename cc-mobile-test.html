@@ -97,7 +97,7 @@
     
     /* Main Content Container */
     .content {
-      margin-left: 80px;
+      margin-left: 80px; /* Leave space for sidebar */
       padding: 20px;
       flex: 1;
     }
@@ -178,27 +178,17 @@
     
     /* Media Queries for Mobile Responsiveness */
     @media (max-width: 768px) {
-      /* Stack layout vertically on mobile */
-      body {
-        flex-direction: column;
+      /* Adjust content margin so it doesn't overlap the fixed sidebar */
+      .content {
+        margin-left: 60px; /* Adjust based on your sidebar width */
         padding: 10px;
       }
       
-      /* Make the sidebar horizontal and reposition it */
-      .sidebar {
-        position: relative;
-        left: 0;
-        top: 0;
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-        margin-bottom: 20px;
-      }
-
-      /* Remove left margin on content */
-      .content {
-        margin-left: 0;
-        padding: 10px;
+      /* Increase toggle button sizes for easier tapping */
+      .toggle {
+        width: 30px;
+        height: 30px;
+        font-size: 28px;
       }
       
       /* Make install photos full width */
@@ -215,7 +205,7 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar with Jump Links -->
+  <!-- Sidebar with Jump Links (remains fixed on the side) -->
   <div class="sidebar">
     <a href="#sectionA" class="toggle">A</a>
     <a href="#sectionB" class="toggle">B</a>
@@ -368,37 +358,4 @@
                 });
 
                 // Inject styles and content into the content container
-                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
-
-                // Create a bottom tag for navigation
-                if (foundTag) {
-                    let bottomTag = document.createElement("div");
-                    bottomTag.className = "poem-bottom-tags";
-                    bottomTag.textContent = foundTag;
-                    bottomTag.style.cursor = "pointer";
-                    contentContainer.appendChild(bottomTag);
-
-                    bottomTag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
-                }
-
-                // Ensure all bottom tags scroll back to navigation
-                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
-                    tag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
-                });
-            })
-            .catch(error => {
-                console.error("Error loading file:", error);
-                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-            });
-    }
-  </script>
-</body>
-</html>
+                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join("
