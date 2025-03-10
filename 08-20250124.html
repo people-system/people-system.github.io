@@ -190,26 +190,40 @@
         color: black !important;
     }
     
-    /* Mobile Styles */
-    @media (max-width: 768px) {
-      /* Reposition sidebar as a horizontal bar on mobile */
-      .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px 0;
-      }
-      /* Adjust main content to leave space for the mobile sidebar */
-      .content {
-        margin: 0;
-        padding: 10px;
-        width: 100%;
-        max-width: none;
-        margin-top: 60px;
-      }
+   @media (max-width: 768px) {
+  /* Reposition sidebar as a horizontal sticky bar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background: white;  /* Ensure background is visible */
+    padding: 10px 0;
+    z-index: 1000;
+    border-bottom: 2px solid black; /* Helps visually separate it */
+  }
+
+  /* Ensure all buttons are equally spaced and visible */
+  .toggle {
+    flex: 1;
+    text-align: center;
+    width: auto;
+    min-width: 50px;  /* Ensures each button is clickable */
+    height: 40px; /* Increased tap size for mobile */
+    font-size: 24px; /* More readable */
+  }
+
+  /* Adjust main content to leave space for the sticky header */
+  .content {
+    margin-top: 70px; /* Ensures content doesn't get hidden under the sticky bar */
+    padding: 10px;
+    width: 100%;
+    max-width: none;
+  }
+}
       /* Remove max-width for Section A image */
       #sectionA img {
         max-width: none;
