@@ -182,14 +182,16 @@
         color: black !important;
     }
     
-    /* Media Queries for Mobile Responsiveness */
-    @media (max-width: 768px) {
-      /* Keep the sidebar fixed. We only adjust content so it doesn't overlap or smash text. */
-      .content {
-        margin-left: 120px;    /* Enough space to avoid the sidebar */
-        margin-right: 20px;  /* Add some breathing room on the right */
-        padding: 10px;
-      }
+@media (max-width: 768px) {
+  .content {
+    margin-left: 120px;
+    margin-right: 20px;
+    padding: 10px;
+    width: 100%; /* Ensure it's not constrained */
+    max-width: none; /* Prevent unwanted width limits */
+  }
+}
+
       
       /* Increase toggle button sizes for easier tapping */
       .toggle {
