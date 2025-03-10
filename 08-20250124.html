@@ -19,8 +19,8 @@
       background-color: #fff;
       color: #000;
     }
-
-    /* Sidebar: fixed on desktop; transforms to top bar on mobile */
+    
+    /* Sidebar for desktop */
     .sidebar {
       position: fixed;
       top: 20px;
@@ -53,27 +53,26 @@
     .toggle:nth-child(2):hover { background: red; color: limegreen; }
     .toggle:nth-child(3):hover { background: black; color: magenta; }
     .toggle:nth-child(4):hover { background: yellow; color: red; }
-
-    /* .wrapper holds all main content (A, B, C, D) */
+    
+    /* .wrapper holds main content (Sections A, B, C, D) */
     .wrapper {
-      /* Leave space on desktop for the sidebar’s fixed width */
       margin-left: 120px; 
       padding: 20px;
-      max-width: 900px; /* So it doesn't stretch too wide on big screens */
+      max-width: 900px;
     }
-
+    
     /* Section styling */
     .section {
       min-height: 100vh;
-      display: block; /* or flex if you prefer */
+      display: block;
       padding: 10px;
       font-size: 18px;
       font-weight: bold;
       background: #fff;
     }
     img { max-width: 100%; height: auto; }
-
-    /* Additional styles for the poem section */
+    
+    /* Poem Section additional styles */
     .title {
       font-size: 26pt;
       font-weight: 100;
@@ -119,48 +118,47 @@
       background-color: white !important;
       color: black !important;
     }
-
+    
     /* Section D: Install Photos */
     .install-photos {
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-
-    /* Mobile query */
+    
+    /* Mobile styles */
     @media (max-width: 768px) {
-      /* Sidebar => horizontal bar at top */
+      /* Sidebar becomes a sticky horizontal bar */
       .sidebar {
-        position: fixed;
+        position: sticky;
         top: 0;
         left: 0;
         right: 0;
         flex-direction: row;
         justify-content: space-around;
         background: white;
-        padding: 10px 0;
-        border-bottom: 2px solid black;
+        padding: 5px 0;
+        border-bottom: 1px solid black;
       }
       .toggle {
         flex: 1;
         text-align: center;
-        min-width: 50px;
-        height: 40px;
-        font-size: 24px;
+        min-width: 40px;
+        height: 30px;
+        font-size: 18px;
       }
-      /* .wrapper below the sticky bar */
+      /* .wrapper now fills viewport width, with top margin to leave space for sticky nav */
       .wrapper {
-        margin: 80px 10px 0 10px; /* top margin for sticky bar; smaller side margin */
-        max-width: none; /* let it fill the screen width on mobile */
+        margin: 40px 10px 0 10px;
+        max-width: 100%;
       }
-      /* Smaller poem title */
+      /* Adjust poem title */
       .title {
         font-size: 20pt;
       }
     }
   </style>
 </head>
-
 <body>
   <!-- Sidebar toggles -->
   <div class="sidebar">
@@ -172,11 +170,9 @@
 
   <!-- Wrapper for main content -->
   <div class="wrapper">
-
     <!-- Section A -->
     <div id="sectionA" class="section">
-      <img src="https://people-system.github.io/cc-sheet.png" 
-           alt="A - paper/text">
+      <img src="https://people-system.github.io/cc-sheet.png" alt="A - paper/text">
     </div>
 
     <!-- Section B -->
@@ -205,7 +201,6 @@
         <!-- etc... -->
       </div>
     </div>
-
   </div> <!-- end .wrapper -->
 
   <!-- Script for Poem Section & Smooth Scroll -->
@@ -224,7 +219,7 @@
       });
     });
 
-    // Poem Section
+    // Poem Section Script
     const tagGroups = [
       ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
       ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
