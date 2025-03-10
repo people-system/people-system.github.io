@@ -126,36 +126,53 @@
       gap: 20px;
     }
     
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      /* Sidebar becomes a sticky horizontal bar */
-      .sidebar {
-        position: sticky;
-        top: 0;
-        left: 0;
-        right: 0;
-        flex-direction: row;
-        justify-content: space-around;
-        background: white;
-        padding: 5px 0;
-        border-bottom: 1px solid black;
-      }
-      .toggle {
-        flex: 1;
-        text-align: center;
-        min-width: 40px;
-        height: 30px;
-        font-size: 18px;
-      }
-      /* .wrapper now fills viewport width, with top margin to leave space for sticky nav */
-      .wrapper {
-        margin: 40px 10px 0 10px;
-        max-width: 100%;
-      }
-      /* Adjust poem title */
-      .title {
-        font-size: 20pt;
-      }
+   @media (max-width: 768px) {
+  .sidebar {
+    /* Pin it to the top, always */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+
+    /* Horizontal layout for mobile */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    /* Styling */
+    background-color: white;
+    padding: 5px 0;
+    border-bottom: 1px solid black;
+  }
+
+  .toggle {
+    flex: 1;
+    text-align: center;
+    min-width: 40px;
+    height: 40px; /* bigger tap target */
+    font-size: 18px;
+  }
+
+  /* Content container can have no top padding if you truly 
+     don't mind it being overlapped by the bar */
+  .wrapper {
+    margin: 0 auto;
+    padding: 10px; /* or 0 if you want no padding at all */
+    max-width: 100%;
+  }
+
+  /* Ensure images are still responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-size: 20pt;
+  }
     }
   </style>
 </head>
