@@ -13,10 +13,12 @@
       margin: 0;
       padding: 0;
       display: flex;
-      /* You can also consider box-sizing for the entire page: */
+      /* Use border-box sizing */
       box-sizing: border-box;
+      background-color: #ffffff;
+      color: #000000;
     }
-    /* Apply box-sizing to all elements for consistent sizing */
+    /* Apply box-sizing to all elements */
     *, *:before, *:after {
       box-sizing: inherit;
     }
@@ -36,14 +38,15 @@
       display: flex;
       flex-direction: column;
       gap: 30px;
+      z-index: 1000;
     }
     .toggle {
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 23px;
+      font-size: 28px;
       font-weight: 100;
       text-decoration: none;
       font-family: "Arial Narrow", "Courier", sans-serif;
@@ -118,32 +121,40 @@
     }
     .install-photos img {
       display: block;
-      max-width: 60%;
+      max-width: 100%;
       height: auto;
       border: 1px solid #ccc;
     }
     
-    /* Additional styles for Section C (Poem Section) */
-    body {
-        /* Removed large padding so the poem text isn't forced too far in. */
-        background-color: #ffffff;
-        color: #000000;
+    /* Responsive Video Container for Section B */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      margin: auto;
+      padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
-
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Additional styles for Section C (Poem Section) */
     .title {
         font-size: 26pt;
         font-weight: 100;
         color: #000000;
         margin-bottom: 10px;
     }
-
     .poem-tag-group {
-        display: inline-flex; /* Keeps the tags together in one visual block */
+        display: inline-flex;
         margin: 5px;
-        background-color: black; /* Shared background */
+        background-color: black;
         padding: 2px 4px;
     }
-
     .poem-tags {
         background-color: black;
         color: white;
@@ -151,20 +162,18 @@
         padding: 2px 6px;
         font-weight: 100;
         font-size: 14pt;
-        margin: 0; /* Remove gaps between grouped elements */
+        margin: 0;
         cursor: pointer;
     }
-
     .poem-tags:hover {
         background-color: white !important;
         color: black !important;
     }
-
     #content-container {
         margin-top: 20px;
         padding: 10px;
         border: none;
-        white-space: pre-wrap; /* Preserves line breaks from the poems */
+        white-space: pre-wrap;
     }
     .poem-bottom-tags {
         background-color: black;
@@ -176,45 +185,48 @@
         margin: 5px;
         cursor: pointer;
     }
-
     .poem-bottom-tags:hover {
         background-color: white !important;
         color: black !important;
     }
     
-@media (max-width: 768px) {
-  .content {
-    margin-left: 120px;
-    margin-right: 20px;
-    padding: 10px;
-    width: 100%; /* Ensure it's not constrained */
-    max-width: none; /* Prevent unwanted width limits */
-  }
-}
-
-      
-      /* Increase toggle button sizes for easier tapping */
-      .toggle {
-        width: 30px;
-        height: 30px;
-        font-size: 28px;
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      /* Reposition sidebar as a horizontal bar on mobile */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px 0;
       }
-      
-      /* Make install photos full width */
-      .install-photos img {
-        max-width: 100%;
-      }
-      
-      /* Adjust iframe size for smaller screens */
-      iframe {
+      /* Adjust main content to leave space for the mobile sidebar */
+      .content {
+        margin: 0;
+        padding: 10px;
         width: 100%;
-        height: auto;
+        max-width: none;
+        margin-top: 60px;
+      }
+      /* Remove max-width for Section A image */
+      #sectionA img {
+        max-width: none;
+        width: 100%;
+      }
+      /* Adjust poem section on mobile */
+      .title {
+          font-size: 20pt;
+      }
+      #poem-tags-container, #content-container {
+          width: 100%;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar with Jump Links (remains fixed on the side) -->
+  <!-- Sidebar with Jump Links (remains fixed on the side or at top on mobile) -->
   <div class="sidebar">
     <a href="#sectionA" class="toggle">A</a>
     <a href="#sectionB" class="toggle">B</a>
@@ -236,13 +248,14 @@
     
     <!-- Section B -->
     <div id="sectionB" class="section">
-      <iframe width="640" height="360" 
-              src="https://www.youtube.com/embed/iGfoHIPUyYE" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-      </iframe>
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/iGfoHIPUyYE" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
     </div>
     
     <!-- Section C: Poem Section -->
@@ -278,8 +291,23 @@
     
   </div> <!-- End main content -->
   
-  <!-- Script for Poem Section -->
+  <!-- Script for Poem Section and Sidebar Behavior -->
   <script>
+    // Sidebar toggles: prevent history hash changes and enable smooth scrolling
+    document.querySelectorAll('.sidebar a.toggle').forEach(link => {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetEl = document.getElementById(targetId);
+          if(targetEl) {
+             targetEl.scrollIntoView({behavior: "smooth"});
+          }
+          // Remove hash from URL so back button doesn't cycle through toggles
+          history.replaceState(null, null, ' ');
+      });
+    });
+    
+    // Poem Section Script
     const tagGroups = [
         ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
         ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
@@ -291,7 +319,7 @@
     const navContainer = document.getElementById("poem-tags-container");
     const contentContainer = document.getElementById("content-container");
 
-    // Create navigation buttons
+    // Create navigation buttons for poem sections
     tagGroups.forEach(group => {
         const groupWrapper = document.createElement("div");
         groupWrapper.className = "poem-tag-group";
@@ -300,7 +328,7 @@
             const tagDiv = document.createElement("div");
             tagDiv.className = "poem-tags";
             tagDiv.textContent = tag;
-            tagDiv.dataset.group = JSON.stringify([tag]); // Ensure single selection works properly
+            tagDiv.dataset.group = JSON.stringify([tag]);
             tagDiv.addEventListener("click", () => {
                 const selectedTag = JSON.parse(tagDiv.dataset.group);
                 loadPoemGroup(selectedTag);
@@ -374,30 +402,4 @@
                     let bottomTag = document.createElement("div");
                     bottomTag.className = "poem-bottom-tags";
                     bottomTag.textContent = foundTag;
-                    bottomTag.style.cursor = "pointer";
-                    contentContainer.appendChild(bottomTag);
-
-                    bottomTag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
-                }
-
-                // Ensure all bottom tags scroll back to navigation
-                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
-                    tag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
-                });
-            })
-            .catch(error => {
-                console.error("Error loading file:", error);
-                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-            });
-    }
-  </script>
-</body>
-</html>
+                    bottomTag.style.cursor = "
