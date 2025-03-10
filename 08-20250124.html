@@ -291,7 +291,7 @@
   </div> <!-- End main content -->
   
   <!-- Script for Poem Section and Sidebar Behavior -->
-  <script>
+    <script>
     // Sidebar toggles: prevent history hash changes and enable smooth scrolling
     document.querySelectorAll('.sidebar a.toggle').forEach(link => {
       link.addEventListener('click', function(e) {
@@ -401,4 +401,30 @@
                     let bottomTag = document.createElement("div");
                     bottomTag.className = "poem-bottom-tags";
                     bottomTag.textContent = foundTag;
-                    bottomTag.style.cursor = "
+                    bottomTag.style.cursor = "pointer";
+                    contentContainer.appendChild(bottomTag);
+
+                    bottomTag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    });
+                }
+
+                // Ensure all bottom tags scroll back to navigation
+                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
+                    tag.addEventListener("click", function() {
+                        document.getElementById("poem-tags-container").scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    });
+                });
+            })
+            .catch(error => {
+                console.error("Error loading file:", error);
+                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+            });
+    }
+  </script>
+</body>
+</html>
