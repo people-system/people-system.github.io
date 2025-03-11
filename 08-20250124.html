@@ -2,138 +2,201 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Ensure proper scaling on mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Connor Camburn – Special Memories – 01/24/2025</title>
   <link rel="icon" href="https://people-system.github.io/favicon/favicon.ico" type="image/x-icon" />
-  
   <style>
-/* Global reset / base */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+    /* Global Styles from the main file */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    img {
+      height: auto;
+    }
+    .spacer {
+      height: 50px;
+    }
+    
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 30px;
+      top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+    .toggle {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+      font-weight: 100;
+      text-decoration: none;
+      font-family: "Arial Narrow", "Courier", sans-serif;
+      letter-spacing: -2px;
+      background-color: white;
+      text-transform: uppercase;
+    }
+    .toggle:nth-child(1) {
+      background: blue;
+      color: #fff;
+    }
+    .toggle:nth-child(2) {
+      background: limegreen;
+      color: rgb(255, 0, 0);
+    }
+    .toggle:nth-child(3) {
+      background: magenta;
+      color: black;
+    }
+    .toggle:nth-child(4) {
+      background: red;
+      color: yellow;
+    }
+    .toggle:nth-child(1):hover,
+    .toggle:nth-child(1):active {
+      background: white;
+      color: blue;
+    }
+    .toggle:nth-child(2):hover,
+    .toggle:nth-child(2):active {
+      background: red;
+      color: limegreen;
+    }
+    .toggle:nth-child(3):hover,
+    .toggle:nth-child(3):active {
+      background: black;
+      color: magenta;
+    }
+    .toggle:nth-child(4):hover,
+    .toggle:nth-child(4):active {
+      background: yellow;
+      color: red;
+    }
+    
+    /* Section Styling */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: #fff;
+    }
+    
+    /* Main Content Container */
+    .content {
+      margin-left: 80px;
+      padding: 20px;
+      flex: 1;
+    }
+    
+    /* Install Photos (Section D) */
+    .install-photos {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .install-photos img {
+      display: block;
+      max-width: 60%;
+      height: auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+  <!-- Additional styles from test-index.html for Section C -->
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 40px;
+        }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
-}
+        .title {
+            font-size: 26pt;
+            font-weight: 100;
+            color: #000000;
+            margin-bottom: 10px;
+        }
 
-/* === FIXED NAVIGATION FOR BOTH DESKTOP & MOBILE === */
-.sidebar {
-  position: fixed;  /* Now it follows as you scroll */
-  top: 20px;
-  left: 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* Ensures space between buttons */
-  z-index: 1000;
-}
+        .poem-tag-group {
+            display: inline-flex; /* Keeps the tags together in one visual block */
+            margin: 5px;
+            background-color: black; /* Shared background */
+            padding: 2px 4px;
+        }
 
-/* === KEEP BUTTON SIZE SAME ON DESKTOP & MOBILE === */
-.toggle {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 100;
-  text-decoration: none;
-  font-family: "Arial Narrow", "Courier", sans-serif;
-  letter-spacing: -2px;
-  background-color: white;
-  text-transform: uppercase;
-}
+        .poem-tags {
+            background-color: black;
+            color: white;
+            display: inline-block;
+            padding: 2px 6px;
+            font-weight: 100;
+            font-size: 14pt;
+            margin: 0; /* Remove gaps between grouped elements */
+            cursor: pointer;
+        }
 
-/* === COLOR STYLES FOR BUTTONS (NO BLACK BAR) === */
-.toggle:nth-child(1) { background: blue; color: #fff; }
-.toggle:nth-child(2) { background: limegreen; color: #f00; }
-.toggle:nth-child(3) { background: magenta; color: #000; }
-.toggle:nth-child(4) { background: red; color: yellow; }
+        .poem-tags:hover {
+            background-color: white !important;
+            color: black !important;
+        }
 
-.toggle:nth-child(1):hover { background: white; color: blue; }
-.toggle:nth-child(2):hover { background: red; color: limegreen; }
-.toggle:nth-child(3):hover { background: black; color: magenta; }
-.toggle:nth-child(4):hover { background: yellow; color: red; }
+        #content-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            white-space: pre-wrap;
+        }
+        .poem-bottom-tags {
+            background-color: black;
+            color: white;
+            display: inline-block;
+            padding: 2px 6px;
+            font-weight: 100;
+            font-size: 14pt;
+            margin: 5px;
+            cursor: pointer;
+        }
 
-/* === MAIN CONTENT === */
-.wrapper {
-  margin-left: 120px; 
-  padding: 20px;
-  max-width: 900px;
-}
-
-/* === SECTION STYLES === */
-.section {
-  min-height: 100vh;
-  display: block;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #fff;
-}
-
-img { 
-  max-width: 100%; 
-  height: auto; 
-}
-
-/* === FIXES FOR MOBILE (max-width: 768px) === */
-@media (max-width: 768px) {
-  .sidebar {
-    position: fixed; /* Stays fixed in place */
-    top: 20px;
-    left: 10px;
-    right: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Space between buttons */
-    width: auto;
-  }
-
-  /* Ensure the buttons don't grow on mobile */
-  .toggle {
-    width: 30px;
-    height: 30px;
-    font-size: 28px;
-  }
-
-  /* Ensure the content fits the mobile screen */
-  .wrapper {
-    margin: 0 auto;
-    padding: 10px;
-    max-width: 100%;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-}
-
+        .poem-bottom-tags:hover {
+            background-color: white !important;
+            color: black !important;
+        }
   </style>
 </head>
 <body>
-  <!-- Sidebar toggles -->
+  <!-- Sidebar with Jump Links -->
   <div class="sidebar">
     <a href="#sectionA" class="toggle">A</a>
     <a href="#sectionB" class="toggle">B</a>
     <a href="#sectionC" class="toggle">C</a>
     <a href="#sectionD" class="toggle">D</a>
   </div>
-
-  <!-- Wrapper for main content -->
-  <div class="wrapper">
+  
+  <!-- Main Content -->
+  <div class="content">
+    <div class="spacer"></div>
+    <br />
+    
     <!-- Section A -->
     <div id="sectionA" class="section">
-      <img src="https://people-system.github.io/cc-sheet.png" alt="A - paper/text">
+      <img src="https://people-system.github.io/cc-sheet.png" 
+           alt="A - paper/text" 
+           style="width: 100%; max-width: 800px; height: auto;">
     </div>
-
+    
     <!-- Section B -->
     <div id="sectionB" class="section">
       <iframe width="640" height="360" 
@@ -144,15 +207,15 @@ img {
               allowfullscreen>
       </iframe>
     </div>
-
-    <!-- Section C -->
+    
+    <!-- Section C: Replaced with the complete test-index.html content -->
     <div id="sectionC" class="section">
       <div class="title">Homage to Nature:</div>
       <div id="poem-tags-container"></div>
       <div id="content-container"></div>
     </div>
-
-    <!-- Section D -->
+    
+<!-- Section D: Install Photos -->
 <div id="sectionD" class="section">
   <div class="install-photos">
     <img src="https://people-system.github.io/08-20250124/1.jpg" alt="Image 2">
@@ -174,134 +237,131 @@ img {
     <img src="https://people-system.github.io/08-20250124/5c.jpg" alt="Image 27">
     <img src="https://people-system.github.io/08-20250124/5d.jpg" alt="Image 29">
   </div>
-  </div> <!-- end .wrapper -->
-
-  <!-- Script for Poem Section & Smooth Scroll -->
+</div>
+    
+  </div> <!-- End main content -->
+  
+  <!-- Script from test-index.html for Section C -->
   <script>
-    // Smooth scrolling without changing URL hash
-    document.querySelectorAll('.sidebar a.toggle').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const targetEl = document.getElementById(targetId);
-        if(targetEl) {
-          targetEl.scrollIntoView({ behavior: 'smooth' });
-        }
-        // Remove hash from URL
-        history.replaceState(null, null, ' ');
-      });
-    });
+const tagGroups = [
+    ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
+    ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
+    ["10a", "10b", "10c"], ["11a", "11b", "11c"], ["12a"], ["13a", "13b", "13c"],
+    ["14a", "14b", "14c", "14d", "14e", "14f", "14g", "14h", "14i"], ["15a", "15b", "15c"],
+    ["16a", "16b", "16c"], ["17a", "17b", "17c", "17d"], ["18a", "18b", "18c", "18d"]
+];
 
-    // Poem Section Script
-    const tagGroups = [
-      ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
-      ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
-      ["10a", "10b", "10c"], ["11a", "11b", "11c"], ["12a"], ["13a", "13b", "13c"],
-      ["14a", "14b", "14c", "14d", "14e", "14f", "14g", "14h", "14i"], ["15a", "15b", "15c"],
-      ["16a", "16b", "16c"], ["17a", "17b", "17c", "17d"], ["18a", "18b", "18c", "18d"]
-    ];
+const navContainer = document.getElementById("poem-tags-container");
+const contentContainer = document.getElementById("content-container");
 
-    const navContainer = document.getElementById("poem-tags-container");
-    const contentContainer = document.getElementById("content-container");
+// Create navigation buttons
+tagGroups.forEach(group => {
+    const groupWrapper = document.createElement("div");
+    groupWrapper.className = "poem-tag-group";
 
-    // Create nav buttons for poem sections
-    tagGroups.forEach(group => {
-      const groupWrapper = document.createElement("div");
-      groupWrapper.className = "poem-tag-group";
-
-      group.forEach(tag => {
+    group.forEach(tag => {
         const tagDiv = document.createElement("div");
         tagDiv.className = "poem-tags";
         tagDiv.textContent = tag;
-        tagDiv.dataset.group = JSON.stringify([tag]);
+        tagDiv.dataset.group = JSON.stringify([tag]); // Ensure single selection works properly
         tagDiv.addEventListener("click", () => {
-          const selectedTag = JSON.parse(tagDiv.dataset.group);
-          loadPoemGroup(selectedTag);
+            const selectedTag = JSON.parse(tagDiv.dataset.group);
+            loadPoemGroup(selectedTag);
         });
         groupWrapper.appendChild(tagDiv);
-      });
-
-      navContainer.appendChild(groupWrapper);
     });
 
-    function loadPoemGroup(groupTags) {
-      fetch("mothership-cc-poems.html")
+    navContainer.appendChild(groupWrapper);
+});
+
+function loadPoemGroup(groupTags) {
+  fetch("mothership-cc-poems.html")
         .then(response => {
-          if (!response.ok) throw new Error("HTTP error: " + response.status);
-          return response.text();
+            if (!response.ok) {
+                throw new Error("HTTP error: " + response.status);
+            }
+            return response.text();
         })
         .then(rawText => {
-          const parser = new DOMParser();
-          const fetchedDoc = parser.parseFromString(rawText, "text/html");
+            const parser = new DOMParser();
+            const fetchedDoc = parser.parseFromString(rawText, "text/html");
 
-          // Extract styles
-          let styleContent = "";
-          fetchedDoc.head.querySelectorAll("style").forEach(styleEl => {
-            styleContent += styleEl.outerHTML;
-          });
+            // Extract all styles from the fetched document
+            let styleContent = "";
+            const styleElements = fetchedDoc.head.querySelectorAll("style");
+            styleElements.forEach(styleEl => {
+                styleContent += styleEl.outerHTML;
+            });
 
-          // Split content by <hr>
-          const groups = [];
-          let currentGroup = [];
-          fetchedDoc.body.childNodes.forEach(node => {
-            if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "hr") {
-              if (currentGroup.length > 0) {
+            // Split the fetched content using <hr> tags
+            const groups = [];
+            let currentGroup = [];
+            fetchedDoc.body.childNodes.forEach(node => {
+                if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "hr") {
+                    if (currentGroup.length > 0) {
+                        groups.push(currentGroup);
+                        currentGroup = [];
+                    }
+                } else {
+                    currentGroup.push(node);
+                }
+            });
+            if (currentGroup.length > 0) {
                 groups.push(currentGroup);
-                currentGroup = [];
-              }
-            } else {
-              currentGroup.push(node);
             }
-          });
-          if (currentGroup.length > 0) groups.push(currentGroup);
 
-          // Find the poem(s)
-          let resultHtml = "";
-          let foundTag = "";
+            // Find and extract the correct poem section
+            let resultHtml = "";
+            let foundTag = "";
 
-          groups.forEach(groupNodes => {
-            const tempContainer = document.createElement("div");
-            groupNodes.forEach(n => tempContainer.appendChild(n.cloneNode(true)));
-            const groupHtml = tempContainer.innerHTML;
+            groups.forEach(groupNodes => {
+                const tempContainer = document.createElement("div");
+                groupNodes.forEach(n => tempContainer.appendChild(n.cloneNode(true)));
+                const groupHtml = tempContainer.innerHTML;
 
-            for (const tag of groupTags) {
-              const marker = `p-${tag}`;
-              if (groupHtml.includes(marker)) {
-                resultHtml += `<hr>${groupHtml}`;
-                foundTag = tag;
-                break;
-              }
+                for (const tag of groupTags) {
+                    const marker = `p-${tag}`;
+                    if (groupHtml.includes(marker)) {
+                        resultHtml += `<hr>${groupHtml}`;
+                        foundTag = tag;
+                        break;
+                    }
+                }
+            });
+
+            // Inject styles and content into the content container
+            contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
+
+            // Create a bottom tag for navigation
+            if (foundTag) {
+                let bottomTag = document.createElement("div");
+                bottomTag.className = "poem-bottom-tags";
+                bottomTag.textContent = foundTag;
+                bottomTag.style.cursor = "pointer";
+                contentContainer.appendChild(bottomTag);
+
+                bottomTag.addEventListener("click", function() {
+                    document.getElementById("poem-tags-container").scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
             }
-          });
 
-          // Inject into #content-container
-          contentContainer.innerHTML = styleContent + (resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`);
-
-          // Add a bottom tag to scroll back up
-          if (foundTag) {
-            const bottomTag = document.createElement("div");
-            bottomTag.className = "poem-bottom-tags";
-            bottomTag.textContent = foundTag;
-            bottomTag.style.cursor = "pointer";
-            contentContainer.appendChild(bottomTag);
-
-            bottomTag.addEventListener("click", () => {
-              navContainer.scrollIntoView({ behavior: "smooth" });
+            // Ensure all bottom tags scroll back to navigation
+            document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
+                tag.addEventListener("click", function() {
+                    document.getElementById("poem-tags-container").scrollIntoView({
+                        behavior: "smooth"
+                    });
+                });
             });
-          }
-
-          // Ensure all bottom tags do the same
-          document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
-            tag.addEventListener("click", () => {
-              navContainer.scrollIntoView({ behavior: "smooth" });
-            });
-          });
         })
         .catch(error => {
-          console.error("Error loading file:", error);
-          contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
+            console.error("Error loading file:", error);
+            contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
         });
-    }
+}
+
   </script>
 </body>
 </html>
