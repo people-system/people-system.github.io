@@ -7,210 +7,199 @@
   <title>Connor Camburn – Special Memories – 01/24/2025</title>
   <link rel="icon" href="https://people-system.github.io/favicon/favicon.ico" type="image/x-icon" />
   <style>
-    /* Global Styles from the main file */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      /* You can also consider box-sizing for the entire page: */
-      box-sizing: border-box;
-    }
-    /* Apply box-sizing to all elements for consistent sizing */
-    *, *:before, *:after {
-      box-sizing: inherit;
-    }
-
-    img {
-      height: auto;
-    }
-    .spacer {
-      height: 50px;
-    }
-    
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      left: 30px;
-      top: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-    .toggle {
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 23px;
-      font-weight: 100;
-      text-decoration: none;
-      font-family: "Arial Narrow", "Courier", sans-serif;
-      letter-spacing: -2px;
-      background-color: white;
-      text-transform: uppercase;
-    }
-    .toggle:nth-child(1) {
-      background: blue;
-      color: #fff;
-    }
-    .toggle:nth-child(2) {
-      background: limegreen;
-      color: rgb(255, 0, 0);
-    }
-    .toggle:nth-child(3) {
-      background: magenta;
-      color: black;
-    }
-    .toggle:nth-child(4) {
-      background: red;
-      color: yellow;
-    }
-    .toggle:nth-child(1):hover,
-    .toggle:nth-child(1):active {
-      background: white;
-      color: blue;
-    }
-    .toggle:nth-child(2):hover,
-    .toggle:nth-child(2):active {
-      background: red;
-      color: limegreen;
-    }
-    .toggle:nth-child(3):hover,
-    .toggle:nth-child(3):active {
-      background: black;
-      color: magenta;
-    }
-    .toggle:nth-child(4):hover,
-    .toggle:nth-child(4):active {
-      background: yellow;
-      color: red;
-    }
-    
-    /* Section Styling */
-    .section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      font-family: Arial, sans-serif;
-      background: #fff;
-    }
-    
-    /* Main Content Container */
-    .content {
-      margin-left: 80px; /* Leave space for sidebar */
-      padding: 20px;
-      flex: 1;
-    }
-    
-    /* Install Photos (Section D) */
-    .install-photos {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-    }
-    .install-photos img {
-      display: block;
-      max-width: 60%;
-      height: auto;
-      border: 1px solid #ccc;
-    }
-    
-    /* Additional styles for Section C (Poem Section) */
-    body {
-        /* Removed large padding so the poem text isn't forced too far in. */
-        background-color: #ffffff;
-        color: #000000;
-    }
-
-    .title {
-        font-size: 26pt;
-        font-weight: 100;
-        color: #000000;
-        margin-bottom: 10px;
-    }
-
-    .poem-tag-group {
-        display: inline-flex; /* Keeps the tags together in one visual block */
-        margin: 5px;
-        background-color: black; /* Shared background */
-        padding: 2px 4px;
-    }
-
-    .poem-tags {
-        background-color: black;
-        color: white;
-        display: inline-block;
-        padding: 2px 6px;
-        font-weight: 100;
-        font-size: 14pt;
-        margin: 0; /* Remove gaps between grouped elements */
-        cursor: pointer;
-    }
-
-    .poem-tags:hover {
-        background-color: white !important;
-        color: black !important;
-    }
-
-    #content-container {
-        margin-top: 20px;
-        padding: 10px;
-        border: none;
-        white-space: pre-wrap; /* Preserves line breaks from the poems */
-    }
-    .poem-bottom-tags {
-        background-color: black;
-        color: white;
-        display: inline-block;
-        padding: 2px 6px;
-        font-weight: 100;
-        font-size: 14pt;
-        margin: 5px;
-        cursor: pointer;
-    }
-
-    .poem-bottom-tags:hover {
-        background-color: white !important;
-        color: black !important;
-    }
-    
-@media (max-width: 768px) {
-  .content {
-    margin-left: 120px;
-    margin-right: 20px;
-    padding: 10px;
-    width: 100%; /* Ensure it's not constrained */
-    max-width: none; /* Prevent unwanted width limits */
-  }
+/* Global Styles from the main file */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
 }
 
-      
-      /* Increase toggle button sizes for easier tapping */
-      .toggle {
-        width: 30px;
-        height: 30px;
-        font-size: 28px;
-      }
-      
-      /* Make install photos full width */
-      .install-photos img {
-        max-width: 100%;
-      }
-      
-      /* Adjust iframe size for smaller screens */
-      iframe {
-        width: 100%;
-        height: auto;
-      }
-    }
+img {
+  height: auto;
+}
+.spacer {
+  height: 50px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 30px;
+  top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.toggle {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 100;
+  text-decoration: none;
+  font-family: "Arial Narrow", "Courier", sans-serif;
+  letter-spacing: -2px;
+  background-color: white;
+  text-transform: uppercase;
+}
+.toggle:nth-child(1) {
+  background: blue;
+  color: #fff;
+}
+.toggle:nth-child(2) {
+  background: limegreen;
+  color: rgb(255, 0, 0);
+}
+.toggle:nth-child(3) {
+  background: magenta;
+  color: black;
+}
+.toggle:nth-child(4) {
+  background: red;
+  color: yellow;
+}
+.toggle:nth-child(1):hover,
+.toggle:nth-child(1):active {
+  background: white;
+  color: blue;
+}
+.toggle:nth-child(2):hover,
+.toggle:nth-child(2):active {
+  background: red;
+  color: limegreen;
+}
+.toggle:nth-child(3):hover,
+.toggle:nth-child(3):active {
+  background: black;
+  color: magenta;
+}
+.toggle:nth-child(4):hover,
+.toggle:nth-child(4):active {
+  background: yellow;
+  color: red;
+}
+
+/* Section Styling */
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+  background: #fff;
+}
+
+/* Main Content Container */
+.content {
+  margin-left: 80px; /* Leave space for sidebar on desktop */
+  padding: 20px;
+  flex: 1;
+}
+
+/* Install Photos (Section D) */
+.install-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.install-photos img {
+  display: block;
+  max-width: 60%;
+  height: auto;
+  border: 1px solid #ccc;
+}
+
+/* Additional styles for Section C (Poem Section) */
+body {
+  background-color: #ffffff;
+  color: #000000;
+}
+.title {
+  font-size: 26pt;
+  font-weight: 100;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.poem-tag-group {
+  display: inline-flex; /* Keeps the tags together in one visual block */
+  margin: 5px;
+  background-color: black;
+  padding: 2px 4px;
+}
+.poem-tags {
+  background-color: black;
+  color: white;
+  display: inline-block;
+  padding: 2px 6px;
+  font-weight: 100;
+  font-size: 14pt;
+  margin: 0; /* Remove gaps between grouped elements */
+  cursor: pointer;
+}
+.poem-tags:hover {
+  background-color: white !important;
+  color: black !important;
+}
+#content-container {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  white-space: pre-wrap; /* Preserves line breaks from the poems */
+}
+.poem-bottom-tags {
+  background-color: black;
+  color: white;
+  display: inline-block;
+  padding: 2px 6px;
+  font-weight: 100;
+  font-size: 14pt;
+  margin: 5px;
+  cursor: pointer;
+}
+.poem-bottom-tags:hover {
+  background-color: white !important;
+  color: black !important;
+}
+
+/* Global iframe styling */
+iframe {
+  width: 100%;
+  /* Remove height: auto if using aspect-ratio for mobile; 
+     you can optionally set a default height for desktop if needed */
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+    padding: 10px;
+    width: 100%;
+  }
+  iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+  .install-photos img {
+    max-width: 100%;
+  }
+  .toggle {
+    width: 30px;
+    height: 30px;
+    font-size: 28px;
+  }
+}
   </style>
 </head>
 <body>
