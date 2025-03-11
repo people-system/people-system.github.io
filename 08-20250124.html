@@ -21,20 +21,18 @@ body {
   color: #000;
 }
 
-/* Desktop Styles (min-width: 769px) */
-@media (min-width: 769px) {
-  .sidebar {
-    position: fixed;
-    top: 20px;
-    left: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    z-index: 1000;
-  }
+/* === FIXED NAVIGATION FOR BOTH DESKTOP & MOBILE === */
+.sidebar {
+  position: fixed;  /* Now it follows as you scroll */
+  top: 20px;
+  left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Ensures space between buttons */
+  z-index: 1000;
 }
 
-/* Shared Styles for toggles (desktop & mobile) */
+/* === KEEP BUTTON SIZE SAME ON DESKTOP & MOBILE === */
 .toggle {
   width: 30px;
   height: 30px;
@@ -50,24 +48,25 @@ body {
   text-transform: uppercase;
 }
 
-/* Color-coded toggles */
+/* === COLOR STYLES FOR BUTTONS (NO BLACK BAR) === */
 .toggle:nth-child(1) { background: blue; color: #fff; }
 .toggle:nth-child(2) { background: limegreen; color: #f00; }
 .toggle:nth-child(3) { background: magenta; color: #000; }
 .toggle:nth-child(4) { background: red; color: yellow; }
+
 .toggle:nth-child(1):hover { background: white; color: blue; }
 .toggle:nth-child(2):hover { background: red; color: limegreen; }
 .toggle:nth-child(3):hover { background: black; color: magenta; }
 .toggle:nth-child(4):hover { background: yellow; color: red; }
 
-/* Wrapper for main content */
+/* === MAIN CONTENT === */
 .wrapper {
   margin-left: 120px; 
   padding: 20px;
   max-width: 900px;
 }
 
-/* Section styling */
+/* === SECTION STYLES === */
 .section {
   min-height: 100vh;
   display: block;
@@ -82,114 +81,41 @@ img {
   height: auto; 
 }
 
-/* Poem Section additional styles */
-.title {
-  font-size: 26pt;
-  font-weight: 100;
-  margin-bottom: 10px;
-}
-
-.poem-tag-group {
-  display: inline-flex;
-  margin: 5px;
-  background-color: black;
-  padding: 2px 4px;
-}
-
-.poem-tags {
-  background-color: black;
-  color: white;
-  display: inline-block;
-  padding: 2px 6px;
-  font-weight: 100;
-  font-size: 14pt;
-  margin: 0;
-  cursor: pointer;
-}
-
-.poem-tags:hover {
-  background-color: white !important;
-  color: black !important;
-}
-
-#content-container {
-  margin-top: 20px;
-  padding: 10px;
-  border: none;
-  white-space: pre-wrap;
-}
-
-.poem-bottom-tags {
-  background-color: black;
-  color: white;
-  display: inline-block;
-  padding: 2px 6px;
-  font-weight: 100;
-  font-size: 14pt;
-  margin: 5px;
-  cursor: pointer;
-}
-
-.poem-bottom-tags:hover {
-  background-color: white !important;
-  color: black !important;
-}
-
-/* Section D: Install Photos */
-.install-photos {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-/* Mobile Styles (max-width: 768px) */
+/* === FIXES FOR MOBILE (max-width: 768px) === */
 @media (max-width: 768px) {
   .sidebar {
-    /* Use sticky positioning on mobile */
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 9999;
-
-    /* Horizontal layout for mobile */
+    position: fixed; /* Stays fixed in place */
+    top: 20px;
+    left: 10px;
+    right: auto;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-
-    /* Styling */
-    background-color: white;
-    padding: 5px 0;
-    border-bottom: 1px solid black;
+    flex-direction: column;
+    gap: 10px; /* Space between buttons */
+    width: auto;
   }
 
+  /* Ensure the buttons don't grow on mobile */
   .toggle {
-    flex-grow: 1;
-    text-align: center;
-    min-width: 40px;
-    height: 40px; /* Bigger tap target */
-    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    font-size: 28px;
   }
 
-  /* Adjust the wrapper to fill mobile screens */
+  /* Ensure the content fits the mobile screen */
   .wrapper {
     margin: 0 auto;
-    padding: 10px; /* Content can be overlapped by the sticky bar if desired */
+    padding: 10px;
     max-width: 100%;
   }
-
+  
   img {
     max-width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
   }
-
-  .title {
-    font-size: 20pt;
-  }
 }
+
   </style>
 </head>
 <body>
