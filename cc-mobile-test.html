@@ -65,14 +65,19 @@
         }
 
         a:link, a:visited {
-            color: black;
+            color: hotpink;
             text-decoration: none;
         }
 
         a:hover, a:active {
+            background-color: black;
+            color: hotpink;
+            text-decoration: underline;
+        }
+
+        a.invert-hover:hover {
             background-color: hotpink;
             color: black;
-            text-decoration: underline;
         }
 
         @media (max-width: 600px) {
@@ -192,7 +197,7 @@
         <p>2024</p>
 
         <p class="block-text" style="color: black;">
-            <a href="#">
+            <a href="#" class="invert-hover">
                 November 6 – December 20<br>
                 P.E.O.P.L.E. (Los Angeles) <br>
                 at Clementin Seedorf<br>
@@ -233,7 +238,7 @@
         </p>
 
         <p class="block-text" style="color: black;">
-            <a href="https://people-system.us/scab-world-04252024.pdf">
+            <a href="https://people-system.us/scab-world-04252024.pdf" class="invert-hover">
                 April 26th – May 30th <br>
                 Scab World<br>
                 at Benny Boys Palazzo di Fuck <br>
