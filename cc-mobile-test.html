@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>P.E.O.P.L.E.</title>
 
-  <!-- Favicon -->
+  <!-- Favicon links -->
   <link rel="apple-touch-icon" sizes="180x180" href="https://people-system.github.io/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="https://people-system.github.io/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="https://people-system.github.io/favicon/favicon-16x16.png">
@@ -17,26 +17,25 @@
   <meta name="theme-color" content="#ffffff">
 
   <style>
-    body, html {
+    /* Basic page reset */
+    html, body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      background-color: black;
-      color: hotpink;
-      overflow: hidden;
+      background: white;  /* White background */
+      color: black;       /* Default text color black */
+      overflow: hidden;   /* Hide scroll until splash is gone */
     }
 
     #splash {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: white;
+      background: white;  /* White splash background */
       cursor: pointer;
       z-index: 1000;
     }
@@ -52,10 +51,10 @@
     }
 
     p.p1 {
+      margin: 0;
       font: 22px Times;
       -webkit-text-stroke: #0000e9;
       cursor: pointer;
-      margin: 0;
     }
 
     .color-change {
@@ -66,31 +65,29 @@
       margin: 40px 0;
     }
 
-    a {
-      color: hotpink;
-      background-color: black;
+    /* Default link styles: black text, no background */
+    a:link, a:visited {
+      color: black;
       text-decoration: none;
     }
 
-    a:hover {
+    /* Default hover: black background, hot pink text */
+    a:hover, a:active {
       background-color: black;
       color: hotpink;
       text-decoration: underline;
     }
 
-    .invert-hover a {
-      color: black;
-      background-color: hotpink;
-    }
-
-    .invert-hover a:hover {
+    /* Inverted hover for specific links */
+    a.invert:hover {
       background-color: hotpink;
       color: black;
       text-decoration: underline;
     }
 
+    /* Media query for mobile devices */
     @media (max-width: 600px) {
-      body, html {
+      html, body {
         font-size: 16px;
       }
 
@@ -108,7 +105,9 @@
   <div id="splash" onclick="hideSplash()">
     <img src="https://people-system.github.io/dream.png" alt="Splash Image">
   </div>
+
   <div id="main-content">
+    <!-- P.E.O.P.L.E. header -->
     <p class="p1" onclick="toggleSplash()">
       <span id="letter1" class="color-change">P</span><span>.</span>
       <span id="letter2" class="color-change">E</span><span>.</span>
@@ -126,7 +125,7 @@
       <a href="https://people-system.us/09-20250315.html">
         March 15th - April 26th<br>
         Bedros Yeretzian<br>
-        Enemies 2
+        Enemies 2<br>
       </a>
     </p>
 
@@ -134,18 +133,19 @@
       <a href="https://people-system.us/08-20250124.html">
         January 24th - March 10th<br>
         Connor Camburn<br>
-        Special Memories
+        Special Memories<br>
       </a>
     </p>
 
     <p>2024</p>
 
-    <p class="block-text invert-hover">
-      <a href="#">
+    <!-- This link uses the "invert" hover style -->
+    <p class="block-text" style="color: black;">
+      <a href="#" class="invert">
         November 6 – December 20<br>
-        P.E.O.P.L.E. (Los Angeles)<br>
+        P.E.O.P.L.E. (Los Angeles) <br>
         at Clementin Seedorf<br>
-        Art Cologne
+        Art Cologne <br>
       </a>
     </p>
 
@@ -153,7 +153,7 @@
       <a href="https://people-system.us/07-20241123.html">
         November 23rd – December 31st<br>
         Veronica Gelbaum<br>
-        Gift of The Magi
+        Gift of The Magi<br>
       </a>
     </p>
 
@@ -161,7 +161,7 @@
       <a href="https://people-system.github.io/06-20240921.html">
         September 21st – October 27th<br>
         Guido Gamboa<br>
-        Twice a Man
+        Twice a Man<br>
       </a>
     </p>
 
@@ -169,7 +169,7 @@
       <a href="https://people-system.github.io/05-20240802.html">
         August 2nd – September 8th<br>
         Ben Schumacher<br>
-        The Lou Reed City
+        The Lou Reed City<br>
       </a>
     </p>
 
@@ -177,16 +177,17 @@
       <a href="https://people-system.us/04-20240525.html">
         May 25th – June 30th<br>
         Pascal Siskin<br>
-        Exotic guitar
+        Exotic guitar<br>
       </a>
     </p>
 
-    <p class="block-text invert-hover">
-      <a href="https://people-system.us/scab-world-04252024.pdf">
-        April 26th – May 30th<br>
+    <!-- This link also uses the "invert" hover style -->
+    <p class="block-text" style="color: black;">
+      <a href="https://people-system.us/scab-world-04252024.pdf" class="invert">
+        April 26th – May 30th <br>
         Scab World<br>
-        at Benny Boys Palazzo di Fuck<br>
-        Berlin
+        at Benny Boys Palazzo di Fuck <br>
+        Berlin <br>
       </a>
     </p>
 
@@ -194,7 +195,7 @@
       <a href="https://people-system.us/03-20240406.html">
         April 6th – May 12th<br>
         Mark Roeder<br>
-        Twelve Sculptures
+        Twelve Sculptures<br>
       </a>
     </p>
 
@@ -203,7 +204,7 @@
         February 23rd – March 24th<br>
         Nilo Goldfarb<br>
         Zaid Milefchik<br>
-        S. Paul
+        S. Paul<br>
       </a>
     </p>
 
@@ -216,7 +217,7 @@
         Zoe Barcza<br>
         Connor Camburn<br>
         Bedros Yeretzian<br>
-        F.R.I.E.N.D.S.
+        F.R.I.E.N.D.S.<br>
       </a>
     </p>
 
@@ -228,6 +229,7 @@
     </p>
   </div>
 
+  <!-- JS at the bottom for splash / color effects -->
   <script>
     function getRandomColor() {
       const letters = '0123456789ABCDEF';
@@ -277,7 +279,7 @@
 
     window.onload = () => {
       checkSplash();
-      setInterval(changeColor, 500);
+      setInterval(changeColor, 500); // Animate P.E.O.P.L.E. letters
     };
   </script>
 </body>
