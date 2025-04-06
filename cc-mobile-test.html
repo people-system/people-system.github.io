@@ -1,392 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Ensure proper scaling on mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connor Camburn – Special Memories – 01/24/2025</title>
-  <link rel="icon" href="https://people-system.github.io/favicon/favicon.ico" type="image/x-icon" />
-  <style>
-/* Global Styles from the main file */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  box-sizing: border-box;
-}
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P.E.O.P.L.E.</title>
 
-img {
-  height: auto;
-}
-.spacer {
-  height: 50px;
-}
+    <!-- Favicon links -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://people-system.github.io/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://people-system.github.io/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://people-system.github.io/favicon/favicon-16x16.png">
+    <link rel="manifest" href="https://people-system.github.io/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://people-system.github.io/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="https://people-system.github.io/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="https://people-system.github.io/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  left: 30px;
-  top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-.toggle {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 23px;
-  font-weight: 100;
-  text-decoration: none;
-  font-family: "Arial Narrow", "Courier", sans-serif;
-  letter-spacing: -2px;
-  background-color: white;
-  text-transform: uppercase;
-}
-.toggle:nth-child(1) {
-  background: blue;
-  color: #fff;
-}
-.toggle:nth-child(2) {
-  background: limegreen;
-  color: rgb(255, 0, 0);
-}
-.toggle:nth-child(3) {
-  background: magenta;
-  color: black;
-}
-.toggle:nth-child(4) {
-  background: red;
-  color: yellow;
-}
-.toggle:nth-child(1):hover,
-.toggle:nth-child(1):active {
-  background: white;
-  color: blue;
-}
-.toggle:nth-child(2):hover,
-.toggle:nth-child(2):active {
-  background: red;
-  color: limegreen;
-}
-.toggle:nth-child(3):hover,
-.toggle:nth-child(3):active {
-  background: black;
-  color: magenta;
-}
-.toggle:nth-child(4):hover,
-.toggle:nth-child(4):active {
-  background: yellow;
-  color: red;
-}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
 
-/* Section Styling */
-.section {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
-  background: #fff;
-}
+        #splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white; /* Set background to white */
+            cursor: pointer;
+            z-index: 1000;
+        }
 
-/* Main Content Container */
-.content {
-  margin-left: 80px; /* Leave space for sidebar on desktop */
-  padding: 20px;
-  flex: 1;
-}
+        #splash img {
+            max-width: 90%; /* Add margins to make space on the sides */
+            max-height: 90%;
+        }
 
-/* Install Photos (Section D) */
-.install-photos {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
-}
-.install-photos img {
-  display: block;
-  max-width: 60%;
-  height: auto;
-  border: 1px solid #ccc;
-}
+        #main-content {
+            display: none;
+            padding: 20px;
+        }
 
-/* Additional styles for Section C (Poem Section) */
-body {
-  background-color: #ffffff;
-  color: #000000;
-}
-.title {
-  font-size: 26pt;
-  font-weight: 100;
-  color: #000000;
-  margin-bottom: 10px;
-}
-.poem-tag-group {
-  display: inline-flex; /* Keeps the tags together in one visual block */
-  margin: 5px;
-  background-color: black;
-  padding: 2px 4px;
-}
-.poem-tags {
-  background-color: black;
-  color: white;
-  display: inline-block;
-  padding: 2px 6px;
-  font-weight: 100;
-  font-size: 14pt;
-  margin: 0; /* Remove gaps between grouped elements */
-  cursor: pointer;
-}
-.poem-tags:hover {
-  background-color: white !important;
-  color: black !important;
-}
-#content-container {
-  margin-top: 20px;
-  padding: 10px;
-  border: none;
-  white-space: pre-wrap; /* Preserves line breaks from the poems */
-}
-.poem-bottom-tags {
-  background-color: black;
-  color: white;
-  display: inline-block;
-  padding: 2px 6px;
-  font-weight: 100;
-  font-size: 14pt;
-  margin: 5px;
-  cursor: pointer;
-}
-.poem-bottom-tags:hover {
-  background-color: white !important;
-  color: black !important;
-}
+        p.p1 {
+            margin: 0.0px 0.0px 0.0px 0.0px;
+            font: 22.0px Times;
+            -webkit-text-stroke: #0000e9;
+            cursor: pointer; /* Add cursor pointer to make it clickable */
+        }
 
-/* Global iframe styling */
-iframe {
-  width: 100%;
-  /* Remove height: auto if using aspect-ratio for mobile; 
-     you can optionally set a default height for desktop if needed */
-}
+        .color-change {
+            font-kerning: none;
+        }
 
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
-  .content {
-    margin-left: 0;
-    padding: 10px;
-    width: 100%;
-  }
-  iframe {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-  .install-photos img {
-    max-width: 100%;
-  }
-  .toggle {
-    width: 30px;
-    height: 30px;
-    font-size: 28px;
-  }
-}
-  </style>
+        .block-text {
+            margin: 40px 0;
+        }
+
+        a:link, a:visited {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover, a:active {
+            color: black;
+            text-decoration: none;
+        }
+
+        /* Custom hover state */
+        a:hover {
+            background-color: black;
+            color: hotpink;
+            text-decoration: underline;
+        }
+
+        /* Media Query for Mobile Devices */
+        @media (max-width: 600px) {
+            body, html {
+                font-size: 16px;
+            }
+
+            p.p1 {
+                font-size: 18px;
+            }
+
+            .block-text {
+                margin: 20px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Sidebar with Jump Links (remains fixed on the side) -->
-  <div class="sidebar">
-    <a href="#sectionA" class="toggle">A</a>
-    <a href="#sectionB" class="toggle">B</a>
-    <a href="#sectionC" class="toggle">C</a>
-    <a href="#sectionD" class="toggle">D</a>
-  </div>
-  
-  <!-- Main Content -->
-  <div class="content">
-    <div class="spacer"></div>
-    <br />
-    
-    <!-- Section A -->
-    <div id="sectionA" class="section">
-      <img src="https://people-system.github.io/cc-sheet.png" 
-           alt="A - paper/text" 
-           style="width: 100%; max-width: 800px; height: auto;">
+    <div id="splash" onclick="hideSplash()">
+        <img src="https://people-system.github.io/dream.png" alt="Splash Image">
     </div>
-    
-    <!-- Section B -->
-    <div id="sectionB" class="section">
-      <iframe width="640" height="360" 
-              src="https://www.youtube.com/embed/iGfoHIPUyYE" 
-              title="YouTube video player" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen>
-      </iframe>
-    </div>
-    
-    <!-- Section C: Poem Section -->
-    <div id="sectionC" class="section">
-      <div class="title">Homage to Nature:</div>
-      <div id="poem-tags-container"></div>
-      <div id="content-container"></div>
-    </div>
-    
-    <!-- Section D: Install Photos -->
-    <div id="sectionD" class="section">
-      <div class="install-photos">
-        <img src="https://people-system.github.io/08-20250124/1.jpg" alt="Image 2">
-        <img src="https://people-system.github.io/08-20250124/2a.jpg" alt="Image 3">
-        <img src="https://people-system.github.io/08-20250124/2c.jpg" alt="Image 5">
-        <img src="https://people-system.github.io/08-20250124/2d.jpg" alt="Image 6">
-        <img src="https://people-system.github.io/08-20250124/2e.jpg" alt="Image 7">
-        <img src="https://people-system.github.io/08-20250124/2f.jpg" alt="Image 8">
-        <img src="https://people-system.github.io/08-20250124/2h.jpg" alt="Image 10">
-        <img src="https://people-system.github.io/08-20250124/3a.jpg" alt="Image 12">
-        <img src="https://people-system.github.io/08-20250124/3b.jpg" alt="Image 13">
-        <img src="https://people-system.github.io/08-20250124/3c.jpg" alt="Image 14">
-        <img src="https://people-system.github.io/08-20250124/4c.jpg" alt="Image 17">
-        <img src="https://people-system.github.io/08-20250124/4f.jpg" alt="Image 19">
-        <img src="https://people-system.github.io/08-20250124/4h.jpg" alt="Image 21">
-        <img src="https://people-system.github.io/08-20250124/4i.jpg" alt="Image 22">
-        <img src="https://people-system.github.io/08-20250124/5a.jpg" alt="Image 25">
-        <img src="https://people-system.github.io/08-20250124/5b.jpg" alt="Image 26">
-        <img src="https://people-system.github.io/08-20250124/5c.jpg" alt="Image 27">
-        <img src="https://people-system.github.io/08-20250124/5d.jpg" alt="Image 29">
-      </div>
-    </div>
-    
-  </div> <!-- End main content -->
-  
-  <!-- Script for Poem Section -->
-  <script>
-    const tagGroups = [
-        ["1a"], ["2a", "2b"], ["3a", "3b"], ["4a", "4b", "4c", "4d", "4e", "4f", "4g"],
-        ["5a"], ["6a"], ["7a", "7b", "7c", "7d"], ["8a", "8b"], ["9a", "9b", "9c"],
-        ["10a", "10b", "10c"], ["11a", "11b", "11c"], ["12a"], ["13a", "13b", "13c"],
-        ["14a", "14b", "14c", "14d", "14e", "14f", "14g", "14h", "14i"], ["15a", "15b", "15c"],
-        ["16a", "16b", "16c"], ["17a", "17b", "17c", "17d"], ["18a", "18b", "18c", "18d"]
-    ];
+    <div id="main-content">
+        <p class="p1" onclick="toggleSplash()">
+            <span id="letter1" class="color-change">P</span>
+            <span style="color: black;">.</span> 
+            <span id="letter2" class="color-change">E</span>
+            <span style="color: black;">.</span> 
+            <span id="letter3" class="color-change">O</span>
+            <span style="color: black;">.</span> 
+            <span id="letter4" class="color-change">P</span>
+            <span style="color: black;">.</span> 
+            <span id="letter5" class="color-change">L</span>
+            <span style="color: black;">.</span> 
+            <span id="letter6" class="color-change">E</span>
+            <span class="color-change">.</span>
+        </p>
 
-    const navContainer = document.getElementById("poem-tags-container");
-    const contentContainer = document.getElementById("content-container");
-
-    // Create navigation buttons
-    tagGroups.forEach(group => {
-        const groupWrapper = document.createElement("div");
-        groupWrapper.className = "poem-tag-group";
-
-        group.forEach(tag => {
-            const tagDiv = document.createElement("div");
-            tagDiv.className = "poem-tags";
-            tagDiv.textContent = tag;
-            tagDiv.dataset.group = JSON.stringify([tag]); // Ensure single selection works properly
-            tagDiv.addEventListener("click", () => {
-                const selectedTag = JSON.parse(tagDiv.dataset.group);
-                loadPoemGroup(selectedTag);
-            });
-            groupWrapper.appendChild(tagDiv);
-        });
-
-        navContainer.appendChild(groupWrapper);
-    });
-
-    function loadPoemGroup(groupTags) {
-      fetch("mothership-cc-poems.html")
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("HTTP error: " + response.status);
+        <script type="text/javascript">
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
                 }
-                return response.text();
-            })
-            .then(rawText => {
-                const parser = new DOMParser();
-                const fetchedDoc = parser.parseFromString(rawText, "text/html");
+                return color;
+            }
 
-                // Extract all styles from the fetched document
-                let styleContent = "";
-                const styleElements = fetchedDoc.head.querySelectorAll("style");
-                styleElements.forEach(styleEl => {
-                    styleContent += styleEl.outerHTML;
-                });
-
-                // Split the fetched content using <hr> tags
-                const groups = [];
-                let currentGroup = [];
-                fetchedDoc.body.childNodes.forEach(node => {
-                    if (node.nodeType === Node.ELEMENT_NODE && node.tagName.toLowerCase() === "hr") {
-                        if (currentGroup.length > 0) {
-                            groups.push(currentGroup);
-                            currentGroup = [];
-                        }
-                    } else {
-                        currentGroup.push(node);
-                    }
-                });
-                if (currentGroup.length > 0) {
-                    groups.push(currentGroup);
+            function changeColor() {
+                for (var i = 1; i <= 6; i++) {
+                    document.getElementById('letter' + i).style.color = getRandomColor();
                 }
+            }
 
-                // Find and extract the correct poem section
-                let resultHtml = "";
-                let foundTag = "";
+            setInterval(changeColor, 500); // Change color every 0.5 seconds
 
-                groups.forEach(groupNodes => {
-                    const tempContainer = document.createElement("div");
-                    groupNodes.forEach(n => tempContainer.appendChild(n.cloneNode(true)));
-                    const groupHtml = tempContainer.innerHTML;
+            function hideSplash() {
+                document.getElementById('splash').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.overflow = 'auto';
+                sessionStorage.setItem('splashShown', 'true');
+            }
 
-                    for (const tag of groupTags) {
-                        const marker = `p-${tag}`;
-                        if (groupHtml.includes(marker)) {
-                            resultHtml += `<hr>${groupHtml}`;
-                            foundTag = tag;
-                            break;
-                        }
-                    }
-                });
-
-                // Inject styles and content into the content container
-                contentContainer.innerHTML = `${styleContent}${resultHtml || `<p>No poem found for ${groupTags.join(", ")}.</p>`}`;
-
-                // Create a bottom tag for navigation
-                if (foundTag) {
-                    let bottomTag = document.createElement("div");
-                    bottomTag.className = "poem-bottom-tags";
-                    bottomTag.textContent = foundTag;
-                    bottomTag.style.cursor = "pointer";
-                    contentContainer.appendChild(bottomTag);
-
-                    bottomTag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
+            function toggleSplash() {
+                const splash = document.getElementById('splash');
+                const mainContent = document.getElementById('main-content');
+                if (splash.style.display === 'none') {
+                    splash.style.display = 'flex';
+                    mainContent.style.display = 'none';
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    splash.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    document.body.style.overflow = 'auto';
                 }
+            }
 
-                // Ensure all bottom tags scroll back to navigation
-                document.querySelectorAll(".poem-bottom-tags").forEach(tag => {
-                    tag.addEventListener("click", function() {
-                        document.getElementById("poem-tags-container").scrollIntoView({
-                            behavior: "smooth"
-                        });
-                    });
-                });
-            })
-            .catch(error => {
-                console.error("Error loading file:", error);
-                contentContainer.innerHTML = `<p>Error: ${error.message}</p>`;
-            });
-    }
-  </script>
+            function checkSplash() {
+                const internalLinks = [
+                    "https://people-system.github.io/word-thing.html",
+                    "https://people-system.us/04-20240525.html",
+                    "https://people-system.us/03-20240406.html",
+                    "https://people-system.us/02-20240223.html",
+                    "https://people-system.github.io/01-20231209.html"
+                ];
+
+                let referrer = document.referrer;
+                let splashShown = sessionStorage.getItem('splashShown');
+
+                if (internalLinks.includes(referrer) && splashShown) {
+                    document.getElementById('splash').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    document.body.style.overflow = 'auto';
+                } else {
+                    document.getElementById('splash').style.display = 'flex';
+                    document.getElementById('main-content').style.display = 'none';
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            window.onload = checkSplash;
+        </script>
+         <br>
+         <br>
+         <a href="https://people-system.github.io/word-thing.html">my-strange-addiction.pdf</a>
+<p>–</p>
+
+        <p class="block-text" style="color: black;">
+    <a href="https://people-system.us/09-20250315.html">
+        March 15th - April 26th<br>
+        Bedros Yeretzian<br>
+        Enemies 2<br>
+    </a>
+</p>
+        
+        <p class="block-text" style="color: black;">
+    <a href="https://people-system.us/08-20250124.html">
+        January 24th - March 10th<br>
+        Connor Camburn<br>
+        Special Memories<br>
+    </a>
+</p>
+        
+<p>2024</p>
+        
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.us/07-20241123.html">
+        November 23rd – December 31st<br>
+        Veronica Gelbaum<br>
+        Gift of The Magi<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.github.io/06-20240921.html">
+        September 21st – October 27th<br>
+        Guido Gamboa<br>
+        Twice a Man<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.github.io/05-20240802.html">
+        August 2nd – September 8th<br>
+        Ben Schumacher<br>
+        The Lou Reed City<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.us/04-20240525.html">
+        May 25th – June 30th<br>
+        Pascal Siskin<br>
+        Exotic guitar<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.us/03-20240406.html">
+        April 6th – May 12th<br>
+        Mark Roeder<br>
+        Twelve Sculptures<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.us/02-20240223.html">
+        February 23rd – March 24th<br>
+        Nilo Goldfarb<br>
+        Zaid Milefchik<br>
+        S. Paul<br>
+    </a>
+</p>
+<p class="block-text" style="color: black;">
+    <a href="https://people-system.github.io/01-20231209.html">
+        December 9th – January 14th<br>
+        Nicole-Antonia Spagnola<br>
+        Ramsey Alderson<br>
+        Emma Sims<br>
+        Zoe Barcza<br>
+        Connor Camburn<br>
+        Bedros Yeretzian<br>
+        F.R.I.E.N.D.S.<br>
+    </a>
+</p>
+<p>–</p>
+         <p class="block-text">
+             <br>
+             no@people-system.us
+             <br>
+             <br>
+             Los Angeles, CA<br>
+             <br>
+         </p>
+    </div>
 </body>
 </html>
