@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Randomized Diagram Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Playfair+Display:wght@900&family=Inter:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#E5E7EB; --ink:#111827; }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Inter',sans-serif;display:flex;flex-direction:column;align-items:center;gap:1.25rem;
+    min-height:100vh;background:var(--bg);color:var(--ink);margin:0;padding:2rem
+  }
+  #title-header{font-family:'Playfair Display',serif;font-weight:900;font-size:2.2rem;letter-spacing:.5px;margin:0;text-align:center}
+  #gallery-container{width:100%;max-width:1100px;aspect-ratio:1.55/1;position:relative;background:#fff;border:2px solid #D1D5DB;border-radius:10px;overflow:hidden}
+  #box-gallery{position:absolute;inset:5%;border:4px solid #DC2626}
+  #overlay-svg{position:absolute;inset:5%;width:90%;height:90%;pointer-events:none}
+  .logic-line{stroke-width:2.5px}
+  .logic-line.dashed{stroke-dasharray:7 7}
+  .node{position:absolute;transform:translate(-50%,-50%);z-index:2;cursor:pointer;transition:.2s transform,.2s filter}
+  .node:hover{transform:translate(-50%,-50%) scale(1.08);filter:drop-shadow(0 3px 8px rgba(0,0,0,.12))}
+  .artist{display:flex;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:8px;border:1px solid rgba(0,0,0,.08);backdrop-filter:blur(2px)}
+  .artist .shape{width:18px;height:18px;flex:0 0 18px}
+  .shape.circle{border-radius:50%}
+  .shape.square{border-radius:3px}
+  .shape.diamond{transform:rotate(45deg);border-radius:3px}
+  .shape.pentagon{clip-path:polygon(50% 0%,100% 38%,82% 100%,18% 100%,0 38%)}
+  .shape.hexagon{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}
+  .shape.star{clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+  .shape.cross{clip-path:polygon(20% 0,80% 0,80% 20%,100% 20%,100% 80%,80% 80%,80% 100%,20% 100%,20% 80%,0 80%,0 20%,20% 20%)}
+  .shape.tri-up{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent}
+  .shape.tri-down{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent}
+  .konzept{
+    font-family:'Roboto Mono',monospace;font-weight:700;font-size:.86rem;
+    padding:.28rem .48rem;border-radius:6px;border:1px dashed rgba(0,0,0,.28);
+    background:rgba(0,0,0,.035); pointer-events:none; cursor:default;
+  }
+  .legend{font:12px/1.2 'Roboto Mono',monospace;opacity:.65}
+</style>
+</head>
+<body>
+  <h1 id="title-header">"PHALLUS :: FASCINUM :: FASCIST >< EVILUTION"
+</h1>
+  <div id="gallery-container">
+    <div id="box-gallery"></div>
+    <svg id="overlay-svg"></svg>
+  </div>
+
+<script>
+/* ============ CONFIG ============ */
+const ARTISTS = [
+  "MAX ALMY",
+  "GRETCHEN BENDER",
+  "RANDY DU CROW",
+  "CONNOR CAMBURN",
+  "KARL HOLMQVIST",
+  "MICHAEL ST. JOHN",
+  "AMANDA ROSS-HO",
+  "BRENNAN STALFORD",
+  "IAN TROUT",
+  "MARK VERABIOFF",
+  "BANKS VIOLETTE",
+  "ERIC WESLEY",
+  "BOBBI WOODS",
+  "JACOB JIAYI ZHANG"
+];
+const SHAPES = ["circle","square","diamond","pentagon","hexagon","star","cross","tri-up","tri-down"];
+
+/* Rash visibility flag: keep logic, render invisibly */
+const SHOW_RASH = false;
+
+/* Source manifesto text for randomized fragments */
+const SOURCE_TEXT = `
+FASCISM CODE IN THE OCCUPATION OF ARTWORKS. THE ARTWORKS AREN’T JUST INCLUDED—THEY’RE REWRITTEN.
+THEIR POSITIONING IS COERCION. THEY ARE FORCED INTO COLLISIONS, INTERRUPTIONS, AND UNREST. THEY HAVE
+NO CHOICE. EACH BECOMES BOTH SUBJECT AND WEAPON: ANALOG BODY DISSECTED, DIGITAL FILE CORRUPTED,
+HYPNOSIS LOOPING IN THE CUBE UNTIL THE SYSTEM ITSELF FRACTURES. EVILUTION REVIVES THIS GENEALOGY
+ONLY TO SABOTAGE IT. FROM ROMAN LEGIONS TO FASCIST SQUADS TO DIGITAL CODE, THE COMMAND SEQUENCE IS
+THE SAME: CONTROL PLACEMENT, SUPPRESS DEVIATION, ENFORCE REPRODUCTION. BUT HERE, INSIDE THE CUBE,
+THE FILES EXECUTE OUT OF ORDER. THE SYSTEM IS HACKED. THE WOUND IS REOPENED. EVILUTION IS
+DISTORTION AS COUNTER-SURVIVAL. THE HYPNOSIS INTERRUPTED. THE FASCISM CODE CORRUPTED. NOT
+BALM BUT INCISION. NOT DÉCOR BUT WOUND. BECAUSE YOUR THROAT IS ALREADY FULL OF FASCIST COCK. ALL
+ARTISTS’ RIGHTS TO THEIR OCCUPATION OF RESIDENCE WITHIN THE WALLS OF THE WESTERN CULTURAL ARENA
+HAVE PROLAPSED. WELCOME TO THE NEW BORE.
+`;
+
+
+/* ============ UTIL ============ */
+const rand = (a,b)=>Math.random()*(b-a)+a;
+const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function hsl(h,s,l,a=1){return `hsla(${h} ${s}% ${l}% / ${a})`}
+
+const WORDS = SOURCE_TEXT
+  .normalize("NFKD")                 // normalize unicode safely
+  .replace(/[\u2013\u2014]/g, " ")   // convert dashes to spaces
+  .replace(/[^\p{L}\p{N}\s]/gu, " ") // remove ALL punctuation
+  .split(" ")                        // split ONLY on spaces
+  .map(w => w.trim())
+  .filter(w => w.length > 0);
+
+
+function randomFragments(count){
+  const out = new Set();
+  const wrappers = [
+    s=>`[${s}]`,
+    s=>`[${s}] → [${randomTiny()}]`,
+    s=>`${s}`,
+    s=>`[${s}] —> `,
+    s=>`[${s}] × [${randomTiny()}]`,
+    s=>`${s} // `,
+    s=>`PHALLUS :: ${s}` 
+  ];
+  function randomTiny(){
+    const len = 1 + Math.floor(Math.random()*2);
+    const i = Math.floor(Math.random()*(WORDS.length-len));
+    return WORDS.slice(i,i+len).join(' ').toUpperCase();
+  }
+  while(out.size < count){
+    const len = 1 + Math.floor(Math.random()*4);
+    const i = Math.floor(Math.random()*(WORDS.length-len));
+    let frag = WORDS.slice(i,i+len).join(' ').toUpperCase();
+    frag = wrappers[Math.floor(Math.random()*wrappers.length)](frag);
+    out.add(frag);
+  }
+  return [...out];
+}
+
+/* ============ STATE ============ */
+let nodeMap = new Map(); // id -> {type, x, y, meta}
+const box = document.getElementById("box-gallery");
+const svg = document.getElementById("overlay-svg");
+
+/* ============ RANDOM LAYOUT ============ */
+function randomArtistStyle(){
+  const hue = Math.floor(rand(0,360));
+  const color = hsl(hue, 72, 42);
+  const highlight = hsl(hue, 90, 92);
+  const shape = pick(SHAPES);
+  return {color, highlight, shape};
+}
+function percentPos(){ // keep inside red box with padding
+  return { x: rand(6,94), y: rand(6,94) };
+}
+function makeArtistNode(name){
+  const {color, highlight, shape} = randomArtistStyle();
+  const p = percentPos();
+  const el = document.createElement("div");
+  el.className = "node artist";
+  el.style.left = p.x+"%";
+  el.style.top  = p.y+"%";
+  el.style.background = highlight;
+  el.dataset.id = name;
+
+  const shapeEl = document.createElement("div");
+  shapeEl.className = "shape "+shape;
+  if(shape==="tri-up"){ shapeEl.style.borderBottom = `18px solid ${color}`; }
+  else if(shape==="tri-down"){ shapeEl.style.borderTop = `18px solid ${color}`; }
+  else { shapeEl.style.background = color; }
+
+  const label = document.createElement("span");
+  label.textContent = name;
+  label.style.color = color;
+  label.style.fontWeight = "700";
+
+  el.appendChild(shapeEl); el.appendChild(label);
+
+  // Clicking any artist regenerates everything
+  el.addEventListener("click", (e)=>{ e.stopPropagation(); regenerate(); });
+
+  box.appendChild(el);
+  nodeMap.set(name, {type:"artist", x:p.x, y:p.y, color, el});
+}
+
+function makeKonzeptNode(text){
+  const p = percentPos();
+  const k = document.createElement("div");
+  k.className = "node konzept";
+  k.style.left = p.x+"%";
+  k.style.top  = p.y+"%";
+  k.textContent = text;
+  k.dataset.id = text;
+  box.appendChild(k);
+  nodeMap.set(text, {type:"konzept", x:p.x, y:p.y, el:k});
+}
+
+/* ============ CONNECTIONS + (INVISIBLE) RASH ============ */
+function drawRash() {
+  // Keep the logic, but render dots the same as the background (invisible)
+  svg.querySelectorAll(".rash, .legend").forEach(n=>n.remove());
+
+  const N = 260;
+  // Determine the background color of the drawing area (the white inner box)
+  const bgColor = getComputedStyle(document.getElementById("gallery-container")).backgroundColor || "#ffffff";
+  const fillForDots = SHOW_RASH ? hsl(285, 35, 62, .22) : bgColor; // invisible when SHOW_RASH=false
+  const fillOpacity = SHOW_RASH ? 1 : 1; // full paint in bg color so it blends perfectly
+
+  for(let i=0;i<N;i++){
+    const cx = rand(5,95), cy = rand(5,95);
+    const dot = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    dot.setAttribute("cx", pctToPxX(cx));
+    dot.setAttribute("cy", pctToPxY(cy));
+    dot.setAttribute("r", rand(1.3,3.6));
+    dot.setAttribute("fill", fillForDots);
+    dot.setAttribute("fill-opacity", fillOpacity);
+    dot.setAttribute("class","rash");
+    svg.appendChild(dot);
+  }
+
+  // Only add the legend text if rash is visible
+  if (SHOW_RASH) {
+    const lg = document.createElementNS("http://www.w3.org/2000/svg","text");
+    lg.setAttribute("x", pctToPxX(6));
+    lg.setAttribute("y", pctToPxY(8));
+    lg.textContent = "RASH FIELD — ACT UP VECTOR";
+    lg.setAttribute("fill", "rgba(0,0,0,.45)");
+    lg.setAttribute("class","legend");
+    svg.appendChild(lg);
+  }
+}
+
+function randomConnections() {
+  svg.querySelectorAll(".logic-line").forEach(n=>n.remove());
+  const ids = [...nodeMap.keys()];
+  const artistIds = ids.filter(id => nodeMap.get(id).type==="artist");
+  const konzeptIds = ids.filter(id => nodeMap.get(id).type==="konzept");
+
+  const edges = [];
+  const edgeCount = 12 + Math.floor(Math.random()*8);
+  function addEdge(a,b,kind){
+    edges.push({a,b,kind,stroke:hsl(rand(0,360),70,40, .6)});
+  }
+  shuffle(artistIds);
+  for(let i=0;i<edgeCount;i++){
+    const roll = Math.random();
+    if(roll<0.45){ addEdge(pick(artistIds), pick(artistIds), Math.random()<.5?"solid":"dashed"); }
+    else if(roll<0.9){ addEdge(pick(artistIds), pick(konzeptIds), Math.random()<.5?"solid":"dashed"); }
+    else { addEdge(pick(konzeptIds), pick(konzeptIds), "dashed"); }
+  }
+
+  edges.forEach(({a,b,kind,stroke})=>{
+    if(a===b) return;
+    const A = nodeMap.get(a), B = nodeMap.get(b);
+    const line = document.createElementNS("http://www.w3.org/2000/svg","line");
+    line.setAttribute("x1", pctToPxX(A.x));
+    line.setAttribute("y1", pctToPxY(A.y));
+    line.setAttribute("x2", pctToPxX(B.x));
+    line.setAttribute("y2", pctToPxY(B.y));
+    line.setAttribute("stroke", stroke);
+    line.setAttribute("class", "logic-line"+(kind==="dashed"?" dashed":""));
+    svg.insertBefore(line, svg.firstChild);
+  });
+}
+
+/* ============ COORD HELPERS ============ */
+function pctToPxX(p){ return (box.clientWidth  * (p/100)); }
+function pctToPxY(p){ return (box.clientHeight * (p/100)); }
+
+function redrawLinesOnResize(){
+  randomConnections(); // rebuild using current node positions
+  drawRash();          // keep logic; renders invisibly when SHOW_RASH=false
+}
+
+/* ============ MASTER REGENERATE ============ */
+function regenerate(){
+  nodeMap.clear();
+  box.querySelectorAll(".node").forEach(n=>n.remove());
+  svg.innerHTML = "";
+
+  // Artists
+  shuffle([...ARTISTS]).forEach(name => makeArtistNode(name));
+
+  // Random manifesto fragments (6–12)
+  const fragCount = 6 + Math.floor(Math.random()*7);
+  randomFragments(fragCount).forEach(f => makeKonzeptNode(f));
+
+  drawRash();         // logic retained; dots invisible unless SHOW_RASH=true
+  randomConnections();
+}
+
+/* ============ INIT ============ */
+window.addEventListener("resize", ()=>{ redrawLinesOnResize(); });
+document.addEventListener("DOMContentLoaded", ()=>{ regenerate(); });
+</script>
+</body>
+</html>
