@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +41,8 @@
     }
 
     #splash img {
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 25%;
+      max-height: 25%;
     }
 
     #main-content {
@@ -88,6 +87,11 @@
 
     /* Media query for mobile devices */
     @media (max-width: 600px) {
+      #splash img {
+        max-width: 90%;
+        max-height: 90%;
+      }
+
       html, body {
         font-size: 16px;
       }
@@ -104,7 +108,7 @@
 </head>
 <body>
   <div id="splash" onclick="hideSplash()">
-    <img src="https://people-system.github.io/splash-02.png" alt="Splash Image">
+    <img src="splash-02.jpg" alt="Splash Image">
   </div>
 
   <div id="main-content">
