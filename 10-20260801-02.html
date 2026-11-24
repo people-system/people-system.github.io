@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Paul Sharits – N:O:T:H:I:N:G & Rapture – 08/01/2026 & 08/02/2026</title>
+  <link rel="icon" href="https://people-system.github.io/favicon/favicon.ico" type="image/x-icon">
+  <style>
+    img {
+      max-width: 50%;
+      height: auto;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .spacer {
+      height: 50px;
+    }
+    #rapture {
+      cursor: pointer;
+      display: inline-block;
+    }
+    a:link, a:visited {
+      color: black;
+      text-decoration: none;
+    }
+    a:hover, a:active, #rapture:hover {
+      background-color: black;
+      color: hotpink;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="10-20260801-02/crop-01.png" alt="N:O:T:H:I:N:G 1">
+  <img src="10-20260801-02/crop-02.png" alt="N:O:T:H:I:N:G 2">
+
+  <p>N:O:T:H:I:N:G</p>
+
+  <div class="spacer"></div>
+
+  <div id="frames"></div>
+  <p><span id="rapture" onclick="nextFrames()">Rapture</span></p>
+
+  <div class="spacer"></div>
+
+  <p><a href="https://www.vasulka.org/archive/Artists6/Sharits%2CPaul/general.pdf">general.pdf</a></p>
+  <p><a href="https://www.vasulka.org/archive/4-20b/Sharits(3005).pdf">Sharits(3005).pdf</a></p>
+
+  <div class="spacer"></div>
+
+  <img src="10-20260801-02/1.png" alt="text 1">
+  <img src="10-20260801-02/2.png" alt="text 2">
+
+  <div class="spacer"></div>
+  <p>Paul Sharits – N:O:T:H:I:N:G & Rapture – 08/01/2026 & 08/02/2026</p>
+
+  <script>
+    const FRAMES = [
+      '001_Mucus.jpg', '002_Urgent.jpg', '003_Pronoun.jpg', '004_Ultra.jpg', '005_Scanning.jpg',
+      '006_Operate.jpg', '007_Heart.jpg', '008_Waste.jpg', '009_Circumflex.jpg', '010_Slit.jpg',
+      '011_Mapped.jpg', '012_Bleed.jpg', '013_Hairless.jpg', '014_Damage.jpg', '015_Definite.jpg',
+      '016_Sonic.jpg', '017_Photons.jpg', '018_Slice.jpg', '019_Cortex.jpg', '020_Solvent.jpg',
+      '021_Cartoon.jpg', '022_Sonic.jpg', '023_Beams.jpg', '024_Improbable.jpg', '025_Distances.jpg',
+      '026_Fracture.jpg', '027_Burning.jpg', '028_Pituitary.jpg', '029_Optic.jpg', '030_Chasm.jpg',
+      '031_Cranium.jpg', '032_Steel.jpg', '033_Drill.jpg', '034_Organ.jpg', '035_Vaginal.jpg',
+      '036_Buzzsaw.jpg', '037_Cerebral.jpg', '038_Velocity.jpg', '039_Mechanical.jpg', '040_Urinal.jpg',
+      '041_Ideas.jpg', '042_Vectors.jpg', '043_Identity.jpg', '044_Virus.jpg', '045_Atomic.jpg',
+      '046_Calm.jpg', '047_Evil.jpg', '048_Compute.jpg', '049_Rotation.jpg', '050_Knife.jpg',
+      '051_Rubber.jpg', '052_Blades.jpg', '053_Sinful.jpg', '054_Thalamus.jpg', '055_Wonder.jpg',
+      '056_Clinical.jpg', '057_Shatter.jpg', '058_Starving.jpg', '059_Melodrama.jpg', '060_Elongate.jpg',
+      '061_Infection.jpg', '062_Inflection.jpg', '063_Unresolved.jpg', '064_Protoplasm.jpg', '065_Babbling.jpg',
+      '066_Flight.jpg', '067_Pattern.jpg', '068_Rabid.jpg', '069_Waves.jpg', '070_Alternate.jpg',
+      '071_Lymph.jpg', '072_Break.jpg', '073_Glandularity.jpg', '074_Hidden.jpg', '075_Factions.jpg',
+      '076_Crush.jpg', '077_Doubt.jpg', '078_Plasma.jpg', '079_Revised.jpg', '080_Flesh.jpg',
+      '081_Lobotomy.jpg', '082_Abysmal.jpg', '083_Slime.jpg', '084_Electrode.jpg', '085_Fist.jpg',
+      '086_Nucleus.jpg', '087_Nerve.jpg', '088_Fibers.jpg', '089_Darkness.jpg', '090_Patient.jpg',
+      '091_Ganglia.jpg', '092_Proton.jpg', '093_Implode.jpg', '094_Nursery.jpg', '095_Hypothetical.jpg',
+      '096_Motorize.jpg', '097_Suck.jpg', '098_Vomit.jpg', '099_Mazes.jpg', '100_Bashing.jpg',
+      '101_Anger.jpg', '102_Enzyme.jpg', '103_When.jpg', '104_Injected.jpg', '105_Definite.jpg',
+      '106_Testicle.jpg', '107_Razor.jpg', '108_Hormone.jpg', '109_Thirst.jpg'
+    ];
+    const TOTAL = FRAMES.length;
+    const PER = 5;
+    const KEY = 'rapture-words-start';
+    const frameSrc = i => '10-20260801-02/' + FRAMES[i];
+
+    function readStart() {
+      try {
+        const v = parseInt(localStorage.getItem(KEY), 10);
+        if (Number.isInteger(v) && v >= 0 && v < TOTAL) return v;
+      } catch (e) {}
+      return 0;
+    }
+
+    function saveStart(v) {
+      try { localStorage.setItem(KEY, String(v)); } catch (e) {}
+    }
+
+    // Show the 5 frames starting at the saved position, then save the next position.
+    function nextFrames() {
+      const start = readStart();
+      const box = document.getElementById('frames');
+      box.innerHTML = '';
+      // The last group may be shorter (106–109); the next one starts again at 001.
+      const end = Math.min(start + PER, TOTAL);
+      for (let i = start; i < end; i++) {
+        const img = document.createElement('img');
+        img.src = frameSrc(i);
+        img.alt = 'Rapture ' + FRAMES[i].replace('.jpg', '');
+        box.appendChild(img);
+      }
+      const next = end % TOTAL;
+      saveStart(next);
+      // Preload the following group
+      for (let i = next; i < Math.min(next + PER, TOTAL); i++) {
+        new Image().src = frameSrc(i);
+      }
+    }
+
+    nextFrames();
+  </script>
+</body>
+</html>
